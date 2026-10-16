@@ -1,19 +1,20 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { ArrowRight, Check, Copy } from 'lucide-react';
-import { PackageManager } from '../types/home.types';
+import React, { useState } from "react";
+import Link from "next/link";
+import { ArrowRight, Check, Copy } from "lucide-react";
+import { PackageManager } from "../types/home.types";
+import { Logo } from "@/components/shared/Logo";
 
 const INSTALL_COMMANDS: Record<PackageManager, string> = {
-  npm: 'npm install paramsync',
-  pnpm: 'pnpm add paramsync',
-  yarn: 'yarn add paramsync',
-  bun: 'bun add paramsync',
+  npm: "npm install paramsync",
+  pnpm: "pnpm add paramsync",
+  yarn: "yarn add paramsync",
+  bun: "bun add paramsync",
 };
 
 export function HomeHero() {
-  const [pm, setPm] = useState<PackageManager>('npm');
+  const [pm, setPm] = useState<PackageManager>("npm");
   const [copied, setCopied] = useState(false);
 
   const currentCommand = INSTALL_COMMANDS[pm];
@@ -29,14 +30,18 @@ export function HomeHero() {
   };
 
   return (
-    <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 pt-16 sm:pt-24 pb-16 text-center bg-white dark:bg-[#23272f] border-b border-zinc-200 dark:border-[#323846] transition-colors">
-      <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white max-w-4xl mx-auto leading-[1.15]">
+    <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 py-19 flex flex-col justify-center items-center bg-white dark:bg-[#23272f] border-b border-zinc-200 dark:border-[#323846] transition-colors">
+      <div className="flex items-center gap-2 group focus:outline-none shrink-0">
+        <Logo className="w-32 h-32 mx-auto" />
+      </div>
+      <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white max-w-4xl mx-auto leading-[1.15] text-center">
         Type-Safe URL Query State Manager for Next.js
       </h1>
 
       <p className="mt-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed">
-        Zero typing lag, automated Clean URL parameter purging, and atomic batch transitions
-        engineered specifically for modern Next.js App Router applications.
+        Zero typing lag, automated Clean URL parameter purging, and atomic batch
+        transitions engineered specifically for modern Next.js App Router
+        applications.
       </p>
 
       {/* Action Buttons */}
@@ -62,15 +67,15 @@ export function HomeHero() {
         <div className="flex items-center justify-between gap-2 px-1 pb-1.5 border-b border-zinc-200 dark:border-[#2a2f3a]">
           {/* Package Manager Switcher Tabs */}
           <div className="flex items-center gap-1">
-            {(['npm', 'pnpm', 'yarn', 'bun'] as PackageManager[]).map((tab) => (
+            {(["npm", "pnpm", "yarn", "bun"] as PackageManager[]).map((tab) => (
               <button
                 key={tab}
                 type="button"
                 onClick={() => setPm(tab)}
                 className={`px-2 py-0.5 rounded text-[11px] font-mono transition-colors cursor-pointer ${
                   pm === tab
-                    ? 'bg-white dark:bg-[#23272f] text-zinc-900 dark:text-white border border-zinc-200 dark:border-[#383f4e] font-medium shadow-2xs'
-                    : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+                    ? "bg-white dark:bg-[#23272f] text-zinc-900 dark:text-white border border-zinc-200 dark:border-[#383f4e] font-medium shadow-2xs"
+                    : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
                 }`}
               >
                 {tab}
