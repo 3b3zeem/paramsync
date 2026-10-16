@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { ConceptDocItem } from '../data/concepts.data';
-import { DocsPaginationFooter } from '../components/DocsPaginationFooter';
-import { CodeBlock } from '@/components/shared/CodeBlock';
-import { ShareFeatureButton } from '@/components/shared/ShareFeatureButton';
-import { AlertCircle, CheckCircle2, Lightbulb } from 'lucide-react';
+import React from "react";
+import { ConceptDocItem } from "../data/concepts.data";
+import { DocsPaginationFooter } from "../components/DocsPaginationFooter";
+import { CodeBlock } from "@/components/shared/CodeBlock";
+import { ShareFeatureButton } from "@/components/shared/ShareFeatureButton";
+import { AlertCircle, CheckCircle2, Lightbulb } from "lucide-react";
 
 interface ConceptDetailDocViewProps {
   concept: ConceptDocItem;
@@ -29,7 +29,7 @@ export function ConceptDetailDocView({ concept }: ConceptDetailDocViewProps) {
           <ShareFeatureButton
             title={concept.title}
             description={concept.summary}
-            url={`https://paramsync.dev/docs/concepts/${concept.slug}`}
+            url={`https://paramsync.vercel.app/docs/concepts/${concept.slug}`}
             category="Core Concept"
           />
         </div>
@@ -88,7 +88,11 @@ export function ConceptDetailDocView({ concept }: ConceptDetailDocViewProps) {
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 tracking-tight">
           Implementation Pattern
         </h2>
-        <CodeBlock code={concept.codeSnippet} language="tsx" filename="Pattern.tsx" />
+        <CodeBlock
+          code={concept.codeSnippet}
+          language="tsx"
+          filename="Pattern.tsx"
+        />
       </section>
 
       {/* Deep Dive Sections if any */}

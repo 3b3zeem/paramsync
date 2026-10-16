@@ -3,7 +3,7 @@ import { flatDocsNavigation } from '@/features/docs/config/docs-navigation.confi
 import { allParserSlugs } from '@/features/docs/data/parsers.data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://paramsync.dev';
+  const baseUrl = 'https://paramsync.vercel.app';
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

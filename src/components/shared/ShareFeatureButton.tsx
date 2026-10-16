@@ -25,7 +25,7 @@ export function ShareFeatureButton({
   const shareUrl =
     typeof window !== "undefined"
       ? url || window.location.href
-      : url || "https://paramsync.dev";
+      : url || "https://paramsync.vercel.app";
 
   // Close on outside click or Escape key
   useEffect(() => {
@@ -98,11 +98,15 @@ export function ShareFeatureButton({
   };
 
   const shareOnLinkedIn = () => {
-    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+    const text = `Check out ${title} in paramsync — Type-Safe URL Query State Manager for Next.js:\n\n${shareUrl}`;
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(shareUrl).catch(() => {});
+    }
+    const linkedInUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(text)}`;
     window.open(
       linkedInUrl,
       "_blank",
-      "noopener,noreferrer,width=600,height=500",
+      "noopener,noreferrer,width=650,height=600",
     );
   };
 

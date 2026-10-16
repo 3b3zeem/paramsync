@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { HookDocItem } from '../data/hooks.data';
-import { DocsPaginationFooter } from '../components/DocsPaginationFooter';
-import { CodeBlock } from '@/components/shared/CodeBlock';
-import { ShareFeatureButton } from '@/components/shared/ShareFeatureButton';
-import { highlightCode, getTokenClass } from '@/lib/syntaxHighlighter';
+import React from "react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { HookDocItem } from "../data/hooks.data";
+import { DocsPaginationFooter } from "../components/DocsPaginationFooter";
+import { CodeBlock } from "@/components/shared/CodeBlock";
+import { ShareFeatureButton } from "@/components/shared/ShareFeatureButton";
+import { highlightCode, getTokenClass } from "@/lib/syntaxHighlighter";
 
 interface HookDetailDocViewProps {
   hook: HookDocItem;
@@ -30,7 +30,7 @@ export function HookDetailDocView({ hook }: HookDetailDocViewProps) {
           <ShareFeatureButton
             title={hook.name}
             description={hook.summary}
-            url={`https://paramsync.dev/docs/hooks/${hook.slug}`}
+            url={`https://paramsync.vercel.app/docs/hooks/${hook.slug}`}
             category="Hook Reference"
           />
         </div>
@@ -54,20 +54,24 @@ export function HookDetailDocView({ hook }: HookDetailDocViewProps) {
                 TypeScript Signature
               </span>
             </div>
-            <span className="text-[10px] text-zinc-500 font-mono">IntelliSense</span>
+            <span className="text-[10px] text-zinc-500 font-mono">
+              IntelliSense
+            </span>
           </div>
           <div className="p-4 overflow-x-auto bg-white dark:bg-[#191b21] font-mono text-xs sm:text-sm">
             <pre className="m-0 leading-relaxed text-zinc-900 dark:text-zinc-100">
               <code>
-                {highlightCode(hook.signature, 'typescript').map((line, lIdx) => (
-                  <div key={lIdx}>
-                    {line.map((token, tIdx) => (
-                      <span key={tIdx} className={getTokenClass(token.type)}>
-                        {token.text}
-                      </span>
-                    ))}
-                  </div>
-                ))}
+                {highlightCode(hook.signature, "typescript").map(
+                  (line, lIdx) => (
+                    <div key={lIdx}>
+                      {line.map((token, tIdx) => (
+                        <span key={tIdx} className={getTokenClass(token.type)}>
+                          {token.text}
+                        </span>
+                      ))}
+                    </div>
+                  ),
+                )}
               </code>
             </pre>
           </div>
@@ -114,15 +118,24 @@ export function HookDetailDocView({ hook }: HookDetailDocViewProps) {
             <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
               <thead>
                 <tr className="border-b border-zinc-200 dark:border-[#2a2f3a] bg-zinc-50 dark:bg-[#23272f] font-sans text-xs text-zinc-700 dark:text-zinc-200">
-                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Option</th>
+                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                    Option
+                  </th>
                   <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Type</th>
-                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Default</th>
-                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Description</th>
+                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                    Default
+                  </th>
+                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                    Description
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-200 dark:divide-[#2a2f3a]/80 text-zinc-600 dark:text-zinc-300 font-sans">
                 {hook.options.map((opt, idx) => (
-                  <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-[#23272f]/40 transition-colors">
+                  <tr
+                    key={idx}
+                    className="hover:bg-zinc-50 dark:hover:bg-[#23272f]/40 transition-colors"
+                  >
                     <td className="p-3.5 sm:px-4 sm:py-3 font-mono font-bold text-zinc-900 dark:text-white">
                       {opt.name}
                     </td>
@@ -133,7 +146,7 @@ export function HookDetailDocView({ hook }: HookDetailDocViewProps) {
                     </td>
                     <td className="p-3.5 sm:px-4 sm:py-3">
                       <span className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 font-mono text-xs">
-                        {opt.defaultValue || '-'}
+                        {opt.defaultValue || "-"}
                       </span>
                     </td>
                     <td className="p-3.5 sm:px-4 sm:py-3 text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm">
@@ -157,14 +170,21 @@ export function HookDetailDocView({ hook }: HookDetailDocViewProps) {
             <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
               <thead>
                 <tr className="border-b border-zinc-200 dark:border-[#2a2f3a] bg-zinc-50 dark:bg-[#23272f] font-sans text-xs text-zinc-700 dark:text-zinc-200">
-                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Return Value</th>
+                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                    Return Value
+                  </th>
                   <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Type</th>
-                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Description</th>
+                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                    Description
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-200 dark:divide-[#2a2f3a]/80 text-zinc-600 dark:text-zinc-300 font-sans">
                 {hook.returns.map((ret, idx) => (
-                  <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-[#23272f]/40 transition-colors">
+                  <tr
+                    key={idx}
+                    className="hover:bg-zinc-50 dark:hover:bg-[#23272f]/40 transition-colors"
+                  >
                     <td className="p-3.5 sm:px-4 sm:py-3 font-mono font-bold text-blue-600 dark:text-blue-300">
                       {ret.name}
                     </td>
@@ -189,7 +209,11 @@ export function HookDetailDocView({ hook }: HookDetailDocViewProps) {
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 tracking-tight">
           Usage Example
         </h2>
-        <CodeBlock code={hook.codeExample} language="tsx" filename={`${hook.name}Example.tsx`} />
+        <CodeBlock
+          code={hook.codeExample}
+          language="tsx"
+          filename={`${hook.name}Example.tsx`}
+        />
 
         {hook.advancedExample && (
           <div className="mt-6">

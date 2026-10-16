@@ -37,7 +37,7 @@ You are acting as a Senior Staff Frontend Architect and Clean Code Engineer. You
 You must strictly organize code according to this exact folder structure. Never place business logic, UI state, heavy views, or feature-specific components inside the Next.js src/app routing directory.
 
 my-app/
-|-- public/                 # Static assets (images, icons, robots.txt, sitemap.xml)
+|-- public/ # Static assets (images, icons, robots.txt, sitemap.xml)
 `-- src/
     |-- app/                # Next.js App Router (STRICTLY ROUTING & SEO ONLY)
     |   |-- layout.tsx      # Root Layout (Base metadataBase, fonts, global providers)
@@ -45,24 +45,24 @@ my-app/
     |   |-- robots.ts       # Dynamic robots.txt generation
     |   |-- sitemap.ts      # Automated XML sitemap generation across all routes
     |   |-- playground/     # Interactive Sandbox (FULL-WIDTH, NO SIDEBAR)
-    |   |   `-- page.tsx    # SEO metadata + renders PlaygroundView
-    |   |-- use-cases/      # Real-world recipes & showcases (FULL-WIDTH, NO SIDEBAR)
-    |   |   `-- page.tsx    # SEO metadata + renders UseCasesView
+    |   |   `-- page.tsx # SEO metadata + renders PlaygroundView
+| |-- use-cases/ # Real-world recipes & showcases (FULL-WIDTH, NO SIDEBAR)
+| | `-- page.tsx    # SEO metadata + renders UseCasesView
     |   |-- docs/           # Documentation Hub (CONTAINS SIDEBAR)
     |   |   |-- layout.tsx  # Docs layout (Injects DocsSidebar + content container)
     |   |   |-- page.tsx    # Redirects to /docs/overview or renders DocsOverviewView
     |   |   |-- faq/
     |   |   |   `-- page.tsx # SEO metadata + renders FAQDocView
-    |   |   `-- parsers/
+| | `-- parsers/
     |   |       `-- [slug]/
-    |   |           `-- page.tsx # Dynamic route: SEO metadata + renders ParserDetailDocView
-    |   `-- globals.css     # Base Tailwind directives and clean CSS variables
-    |
-    |-- assets/             # Internal SVGs, brand assets, and local icons
-    |-- components/         # Shared global design system components ONLY
-    |   |-- layout/         # Header, Footer, Navbar
-    |   |-- shared/         # EmptyState, ErrorBoundary, CodeBlock
-    |   `-- ui/             # Reusable primitives (Button, Input, Modal, Dropdown, Slider)
+| | `-- page.tsx # Dynamic route: SEO metadata + renders ParserDetailDocView
+    |   `-- globals.css # Base Tailwind directives and clean CSS variables
+|
+|-- assets/ # Internal SVGs, brand assets, and local icons
+|-- components/ # Shared global design system components ONLY
+| |-- layout/ # Header, Footer, Navbar
+| |-- shared/ # EmptyState, ErrorBoundary, CodeBlock
+| `-- ui/             # Reusable primitives (Button, Input, Modal, Dropdown, Slider)
     |
     |-- features/           # ALL BUSINESS LOGIC, VIEWS, AND FEATURE-SPECIFIC COMPONENTS
     |   |-- docs/           # Documentation Feature Domain
@@ -71,42 +71,44 @@ my-app/
     |   |   |-- data/       # parsers.data.ts, hooks.data.ts, faq.data.ts
     |   |   |-- hooks/      # useDocPagination.ts
     |   |   |-- types/      # docs.types.ts, doc-parser.types.ts
-    |   |   `-- views/      # ParserDetailDocView.tsx, FAQDocView.tsx, DocsOverviewView.tsx
-    |   |
-    |   |-- playground/     # Interactive Demo Sandbox Domain
-    |   |   |-- components/ # FauxBrowserBar, InstantFiltersTab, BatchDrawerTab, StateInspector
-    |   |   |-- hooks/      # usePlaygroundSimulator.ts
-    |   |   |-- types/      # playground.types.ts
-    |   |   `-- views/      # PlaygroundView.tsx
+    |   |   `-- views/ # ParserDetailDocView.tsx, FAQDocView.tsx, DocsOverviewView.tsx
+| |
+| |-- playground/ # Interactive Demo Sandbox Domain
+| | |-- components/ # FauxBrowserBar, InstantFiltersTab, BatchDrawerTab, StateInspector
+| | |-- hooks/ # usePlaygroundSimulator.ts
+| | |-- types/ # playground.types.ts
+| | `-- views/      # PlaygroundView.tsx
     |   |
     |   |-- use-cases/      # Real-world Showcases Domain
     |   |   |-- components/ # ShowcaseCard, CodeTabs
     |   |   |-- types/      # use-cases.types.ts
-    |   |   `-- views/      # UseCasesView.tsx
-    |   |
-    |   `-- home/           # Landing Page Domain
+    |   |   `-- views/ # UseCasesView.tsx
+| |
+| `-- home/           # Landing Page Domain
     |       |-- components/ # Hero, FeatureMatrix, CodeComparisonTable
     |       |-- types/      # home.types.ts
-    |       `-- views/      # HomeView.tsx
-    |
-    |-- hooks/              # Global utility custom hooks (useMediaQuery, useClickOutside)
-    |-- lib/                # Third-party setups (cn helper, syntax highlighting config)
-    |-- providers/          # ThemeProvider
-    |-- types/              # Cross-app global TypeScript interfaces
-    `-- utils/              # General helper functions & meta helpers
+    |       `-- views/ # HomeView.tsx
+|
+|-- hooks/ # Global utility custom hooks (useMediaQuery, useClickOutside)
+|-- lib/ # Third-party setups (cn helper, syntax highlighting config)
+|-- providers/ # ThemeProvider
+|-- types/ # Cross-app global TypeScript interfaces
+`-- utils/ # General helper functions & meta helpers
 
 ---
 
 ## 3. Strict Layer Boundaries & File Responsibilities
 
 ### Rule 1: Files in src/app/ are Strictly for Routing & SEO (NO JSX Layout Logic)
+
 - Any page.tsx file inside src/app/ must NEVER contain UI implementation details, layout markup, state management, event handlers, or local styling.
 - A page.tsx file has strictly two duties:
   1. Define and export static metadata or dynamic generateMetadata().
-  2. Return the corresponding View component imported directly from src/features/*.
+  2. Return the corresponding View component imported directly from src/features/\*.
 - File Length Constraint: A page.tsx must be concise (under 35 lines of clean code).
 
-### Rule 2: All UI, Hooks, and Domain Data Must Live in src/features/*
+### Rule 2: All UI, Hooks, and Domain Data Must Live in src/features/\*
+
 - Every feature module is self-contained. Feature views must only import from:
   - Their own local subfolders (components/, hooks/, types/, data/).
   - Shared generic primitives in @/components/ui/ or @/components/layout/.
@@ -120,11 +122,11 @@ my-app/
 Every route in src/app/ must implement comprehensive SEO tags:
 
 1. Root Layout (src/app/layout.tsx):
-   - Must define metadataBase: new URL('https://paramsync.dev').
+   - Must define metadataBase: new URL('https://paramsync.vercel.app').
    - Must set default and template titles:
      title: {
-       default: 'paramsync | Type-Safe URL Query State Manager for Next.js',
-       template: '%s | paramsync',
+     default: 'paramsync | Type-Safe URL Query State Manager for Next.js',
+     template: '%s | paramsync',
      }
    - Must declare global OpenGraph, Twitter Card specifications, and robots directives (index: true, follow: true).
 

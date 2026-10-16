@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,15 +10,18 @@ import {
   Columns,
   MoreVertical,
   ShieldCheck,
-} from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
+} from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 interface FauxBrowserBarProps {
   isPending?: boolean;
   onResetAll?: () => void;
 }
 
-export function FauxBrowserBar({ isPending = false, onResetAll }: FauxBrowserBarProps) {
+export function FauxBrowserBar({
+  isPending = false,
+  onResetAll,
+}: FauxBrowserBarProps) {
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
 
@@ -58,7 +61,7 @@ export function FauxBrowserBar({ isPending = false, onResetAll }: FauxBrowserBar
               aria-label="Reload"
             >
               <RotateCcw
-                className={`w-3.5 h-3.5 ${isPending ? 'animate-spin text-blue-500' : ''}`}
+                className={`w-3.5 h-3.5 ${isPending ? "animate-spin text-blue-500" : ""}`}
               />
             </button>
           </div>
@@ -67,7 +70,9 @@ export function FauxBrowserBar({ isPending = false, onResetAll }: FauxBrowserBar
         {/* Address Input Bar - Completely Natural Browser URL */}
         <div className="flex-1 flex items-center min-w-0 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-md px-3 py-1.5 font-mono text-xs overflow-x-auto text-zinc-800 dark:text-zinc-200">
           <Lock className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500 shrink-0 mr-2" />
-          <span className="text-zinc-400 dark:text-zinc-500 shrink-0 select-none">https://paramsync.dev/shop</span>
+          <span className="text-zinc-400 dark:text-zinc-500 shrink-0 select-none">
+            https://paramsync.vercel.app/shop
+          </span>
 
           {queryString ? (
             <span className="text-zinc-900 dark:text-zinc-100 font-mono ml-0.5 truncate select-all">
@@ -112,4 +117,3 @@ export function FauxBrowserBar({ isPending = false, onResetAll }: FauxBrowserBar
     </div>
   );
 }
-

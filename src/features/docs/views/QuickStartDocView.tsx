@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { DocsPaginationFooter } from '../components/DocsPaginationFooter';
-import { CodeBlock } from '@/components/shared/CodeBlock';
-import { ShareFeatureButton } from '@/components/shared/ShareFeatureButton';
+import React from "react";
+import { DocsPaginationFooter } from "../components/DocsPaginationFooter";
+import { CodeBlock } from "@/components/shared/CodeBlock";
+import { ShareFeatureButton } from "@/components/shared/ShareFeatureButton";
 
 export function QuickStartDocView() {
   return (
@@ -13,13 +13,15 @@ export function QuickStartDocView() {
           <div className="flex items-center gap-2 font-mono text-xs text-zinc-500">
             <span>paramsync</span>
             <span>&gt;</span>
-            <span className="text-zinc-700 dark:text-zinc-300">quick-start</span>
+            <span className="text-zinc-700 dark:text-zinc-300">
+              quick-start
+            </span>
           </div>
 
           <ShareFeatureButton
             title="Quick Start Tutorial"
             description="Learn how to bind query parameters to React state in under 5 minutes."
-            url="https://paramsync.dev/docs/quick-start"
+            url="https://paramsync.vercel.app/docs/quick-start"
             category="Getting Started"
           />
         </div>
@@ -27,7 +29,8 @@ export function QuickStartDocView() {
           Quick Start Tutorial
         </h1>
         <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
-          Learn how to bind query parameters to React state with zero typing latency in under 5 minutes.
+          Learn how to bind query parameters to React state with zero typing
+          latency in under 5 minutes.
         </p>
       </header>
 
@@ -37,7 +40,11 @@ export function QuickStartDocView() {
           Step 1: Import useQueryState and Parsers
         </h2>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
-          Import <code className="font-mono text-blue-600 dark:text-blue-400 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">useQueryState</code> along with the built-in parser that matches your data type:
+          Import{" "}
+          <code className="font-mono text-blue-600 dark:text-blue-400 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">
+            useQueryState
+          </code>{" "}
+          along with the built-in parser that matches your data type:
         </p>
         <CodeBlock
           code={`'use client';\n\nimport { useQueryState, parseAsString, parseAsInteger } from 'paramsync';`}
@@ -51,7 +58,12 @@ export function QuickStartDocView() {
           Step 2: Create a Debounced Search Input
         </h2>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
-          Pass <code className="font-mono text-emerald-600 dark:text-emerald-400 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">&#123; debounceMs: 300 &#125;</code> to debounce URL updates while keeping local input state 100% instantaneous:
+          Pass{" "}
+          <code className="font-mono text-emerald-600 dark:text-emerald-400 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">
+            &#123; debounceMs: 300 &#125;
+          </code>{" "}
+          to debounce URL updates while keeping local input state 100%
+          instantaneous:
         </p>
         <CodeBlock
           code={`const [search, setSearch] = useQueryState(\n  'q',\n  parseAsString.withDefault(''),\n  { debounceMs: 300 }\n);`}
@@ -65,7 +77,8 @@ export function QuickStartDocView() {
           Step 3: Add Pagination with Auto-Reset
         </h2>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
-          Reset page back to 1 when the search query changes so users don&apos;t end up on an empty page:
+          Reset page back to 1 when the search query changes so users don&apos;t
+          end up on an empty page:
         </p>
         <CodeBlock
           code={`const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));\n\nconst handleSearch = (newVal: string) => {\n  setPage(1); // Cleans ?page from URL\n  setSearch(newVal);\n};`}

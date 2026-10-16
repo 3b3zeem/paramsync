@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   useBatchQueryParams,
   parseAsArray,
   parseAsString,
   parseAsNumberRange,
-} from 'paramsync';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check, ArrowRight, RotateCcw, Layers } from 'lucide-react';
+} from "paramsync";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Check, ArrowRight, RotateCcw, Layers } from "lucide-react";
 
 interface BatchStagingDrawerProps {
   isOpen: boolean;
@@ -16,26 +16,31 @@ interface BatchStagingDrawerProps {
 }
 
 const CATEGORIES = [
-  { id: 'footwear', label: 'Footwear' },
-  { id: 'electronics', label: 'Electronics' },
-  { id: 'audio', label: 'Audio' },
-  { id: 'accessories', label: 'Accessories' },
+  { id: "footwear", label: "Footwear" },
+  { id: "electronics", label: "Electronics" },
+  { id: "audio", label: "Audio" },
+  { id: "accessories", label: "Accessories" },
 ];
 
-export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps) {
+export function BatchStagingDrawer({
+  isOpen,
+  onClose,
+}: BatchStagingDrawerProps) {
   const { setBatchParams, resetAllParams, isPending } = useBatchQueryParams();
 
   // Local staged values
-  const [stagedSearch, setStagedSearch] = useState('shoes');
-  const [stagedCategories, setStagedCategories] = useState<string[]>(['footwear']);
+  const [stagedSearch, setStagedSearch] = useState("shoes");
+  const [stagedCategories, setStagedCategories] = useState<string[]>([
+    "footwear",
+  ]);
   const [stagedMinPrice, setStagedMinPrice] = useState(100);
   const [stagedMaxPrice, setStagedMaxPrice] = useState(500);
   const [stagedInStock, setStagedInStock] = useState(true);
-  const [stagedSort, setStagedSort] = useState('price.asc');
+  const [stagedSort, setStagedSort] = useState("price.asc");
 
   const toggleCategory = (id: string) => {
     setStagedCategories((prev) =>
-      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id],
     );
   };
 
@@ -50,8 +55,8 @@ export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps)
         value: { min: stagedMinPrice, max: stagedMaxPrice },
         parser: parseAsNumberRange(0, 1000),
       },
-      inStock: stagedInStock ? 'true' : null,
-      sort: stagedSort === 'price.asc' ? null : stagedSort,
+      inStock: stagedInStock ? "true" : null,
+      sort: stagedSort === "price.asc" ? null : stagedSort,
       page: null, // Reset to page 1
     });
     onClose();
@@ -59,7 +64,7 @@ export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps)
 
   const handleReset = () => {
     resetAllParams();
-    setStagedSearch('');
+    setStagedSearch("");
     setStagedCategories([]);
     setStagedMinPrice(0);
     setStagedMaxPrice(1000);
@@ -70,11 +75,14 @@ export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps)
   // Compute pending preview query string
   const pendingParams: string[] = [];
   if (stagedSearch) pendingParams.push(`q=${encodeURIComponent(stagedSearch)}`);
-  if (stagedCategories.length > 0) pendingParams.push(`category=${stagedCategories.join(',')}`);
-  if (stagedMinPrice !== 0 || stagedMaxPrice !== 1000) pendingParams.push(`price=${stagedMinPrice}-${stagedMaxPrice}`);
+  if (stagedCategories.length > 0)
+    pendingParams.push(`category=${stagedCategories.join(",")}`);
+  if (stagedMinPrice !== 0 || stagedMaxPrice !== 1000)
+    pendingParams.push(`price=${stagedMinPrice}-${stagedMaxPrice}`);
   if (stagedInStock) pendingParams.push(`inStock=true`);
-  if (stagedSort !== 'price.asc') pendingParams.push(`sort=${stagedSort}`);
-  const previewQuery = pendingParams.length > 0 ? `?${pendingParams.join('&')}` : '';
+  if (stagedSort !== "price.asc") pendingParams.push(`sort=${stagedSort}`);
+  const previewQuery =
+    pendingParams.length > 0 ? `?${pendingParams.join("&")}` : "";
 
   return (
     <AnimatePresence>
@@ -96,10 +104,10 @@ export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps)
 
           {/* Drawer Body */}
           <motion.div
-            initial={{ x: '100%' }}
+            initial={{ x: "100%" }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 30, stiffness: 350 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 350 }}
             className="relative z-10 w-full max-w-lg bg-white dark:bg-zinc-950 border-l border-zinc-200 dark:border-zinc-800 h-full p-6 flex flex-col justify-between shadow-2xl overflow-y-auto"
           >
             <div className="space-y-6">
@@ -112,7 +120,8 @@ export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps)
                       Batch Transaction Drawer (Staging)
                     </h3>
                     <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
-                      Edit multiple filters without triggering URL router transitions.
+                      Edit multiple filters without triggering URL router
+                      transitions.
                     </p>
                   </div>
                 </div>
@@ -154,11 +163,13 @@ export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps)
                         onClick={() => toggleCategory(cat.id)}
                         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono transition-colors border ${
                           isSelected
-                            ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 border-zinc-900 dark:border-zinc-100 font-semibold'
-                            : 'bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'
+                            ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 border-zinc-900 dark:border-zinc-100 font-semibold"
+                            : "bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
                         }`}
                       >
-                        {isSelected && <Check className="w-3.5 h-3.5 text-white dark:text-zinc-950" />}
+                        {isSelected && (
+                          <Check className="w-3.5 h-3.5 text-white dark:text-zinc-950" />
+                        )}
                         <span>{cat.label}</span>
                       </button>
                     );
@@ -176,21 +187,31 @@ export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps)
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 flex items-center bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2.5 py-1 text-xs font-mono text-zinc-700 dark:text-zinc-300">
-                    <span className="text-zinc-400 dark:text-zinc-500 mr-1">$</span>
+                    <span className="text-zinc-400 dark:text-zinc-500 mr-1">
+                      $
+                    </span>
                     <input
                       type="number"
                       value={stagedMinPrice}
-                      onChange={(e) => setStagedMinPrice(Number(e.target.value))}
+                      onChange={(e) =>
+                        setStagedMinPrice(Number(e.target.value))
+                      }
                       className="w-full bg-transparent focus:outline-none text-zinc-900 dark:text-zinc-100"
                     />
                   </div>
-                  <span className="text-zinc-400 dark:text-zinc-600 text-xs font-mono">to</span>
+                  <span className="text-zinc-400 dark:text-zinc-600 text-xs font-mono">
+                    to
+                  </span>
                   <div className="flex-1 flex items-center bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2.5 py-1 text-xs font-mono text-zinc-700 dark:text-zinc-300">
-                    <span className="text-zinc-400 dark:text-zinc-500 mr-1">$</span>
+                    <span className="text-zinc-400 dark:text-zinc-500 mr-1">
+                      $
+                    </span>
                     <input
                       type="number"
                       value={stagedMaxPrice}
-                      onChange={(e) => setStagedMaxPrice(Number(e.target.value))}
+                      onChange={(e) =>
+                        setStagedMaxPrice(Number(e.target.value))
+                      }
                       className="w-full bg-transparent focus:outline-none text-zinc-900 dark:text-zinc-100"
                     />
                   </div>
@@ -216,8 +237,12 @@ export function BatchStagingDrawer({ isOpen, onClose }: BatchStagingDrawerProps)
                   Pending 1-Transition URL Preview
                 </span>
                 <div className="text-zinc-800 dark:text-zinc-200 break-all bg-white dark:bg-zinc-950/80 p-2 rounded border border-zinc-200 dark:border-zinc-800">
-                  <span className="text-zinc-400 dark:text-zinc-500">https://paramsync.dev/shop</span>
-                  <span className="text-blue-600 dark:text-blue-300 font-semibold">{previewQuery || ' (clean URL)'}</span>
+                  <span className="text-zinc-400 dark:text-zinc-500">
+                    https://paramsync.vercel.app/shop
+                  </span>
+                  <span className="text-blue-600 dark:text-blue-300 font-semibold">
+                    {previewQuery || " (clean URL)"}
+                  </span>
                 </div>
               </div>
             </div>

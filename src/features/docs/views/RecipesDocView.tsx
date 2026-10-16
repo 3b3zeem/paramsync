@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { DocsPaginationFooter } from '../components/DocsPaginationFooter';
-import { CodeBlock } from '@/components/shared/CodeBlock';
-import { ShareFeatureButton } from '@/components/shared/ShareFeatureButton';
-import { Database, Server, Smartphone } from 'lucide-react';
+import React from "react";
+import { DocsPaginationFooter } from "../components/DocsPaginationFooter";
+import { CodeBlock } from "@/components/shared/CodeBlock";
+import { ShareFeatureButton } from "@/components/shared/ShareFeatureButton";
+import { Database, Server, Smartphone } from "lucide-react";
 
 export function RecipesDocView() {
   return (
@@ -20,7 +20,7 @@ export function RecipesDocView() {
           <ShareFeatureButton
             title="Integration Recipes"
             description="Production recipes for TanStack Query, RSC, and URL modals."
-            url="https://paramsync.dev/docs/recipes"
+            url="https://paramsync.vercel.app/docs/recipes"
             category="Recipes"
           />
         </div>
@@ -28,7 +28,8 @@ export function RecipesDocView() {
           Integration Recipes
         </h1>
         <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
-          Common architectural recipes: TanStack Query, React Server Components (RSC), and URL-driven modals.
+          Common architectural recipes: TanStack Query, React Server Components
+          (RSC), and URL-driven modals.
         </p>
       </header>
 
@@ -39,7 +40,8 @@ export function RecipesDocView() {
           <h2>TanStack Query Synchronization</h2>
         </div>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3 leading-relaxed">
-          Pass reactive query state directly into queryKey arrays. React Query automatically refetches data whenever the URL changes:
+          Pass reactive query state directly into queryKey arrays. React Query
+          automatically refetches data whenever the URL changes:
         </p>
         <CodeBlock
           code={`'use client';
@@ -71,7 +73,8 @@ export function ProductFeed() {
           <h2>Server Component (RSC) Direct Parser Usage</h2>
         </div>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3 leading-relaxed">
-          Because parsers have zero DOM dependencies, you can import and run them directly in server components and Route Handlers:
+          Because parsers have zero DOM dependencies, you can import and run
+          them directly in server components and Route Handlers:
         </p>
         <CodeBlock
           code={`// app/products/page.tsx (Server Component)
@@ -108,7 +111,8 @@ export default async function ProductsPage({ searchParams }: PageProps) {
           <h2>URL-Driven Shareable Modals</h2>
         </div>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3 leading-relaxed">
-          Control modal visibility and active item selection via query parameters so users can share links directly to open dialogs:
+          Control modal visibility and active item selection via query
+          parameters so users can share links directly to open dialogs:
         </p>
         <CodeBlock
           code={`'use client';

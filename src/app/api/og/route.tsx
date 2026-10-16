@@ -159,7 +159,7 @@ export async function GET(request: NextRequest) {
                 color: '#71717a',
               }}
             >
-              paramsync.dev
+              paramsync
             </div>
           </div>
         </div>

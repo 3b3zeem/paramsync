@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   SlidersHorizontal,
   Layers,
@@ -9,12 +9,13 @@ import {
   Check,
   RotateCcw,
   Share2,
-} from 'lucide-react';
-import { motion } from 'framer-motion';
+} from "lucide-react";
+import { motion } from "framer-motion";
+import { ShareFeatureButton } from "@/components/shared/ShareFeatureButton";
 
 interface PlaygroundHeaderProps {
-  activeTab: 'instant' | 'batch';
-  onSelectTab: (tab: 'instant' | 'batch') => void;
+  activeTab: "instant" | "batch";
+  onSelectTab: (tab: "instant" | "batch") => void;
   onOpenDrawer: () => void;
   onResetAll: () => void;
   onApplyPreset: () => void;
@@ -31,7 +32,7 @@ export function PlaygroundHeader({
 
   const handleCopyUrl = async () => {
     try {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         await navigator.clipboard.writeText(window.location.href);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
@@ -46,11 +47,11 @@ export function PlaygroundHeader({
         {/* Instant Reactive Filters Tab */}
         <button
           type="button"
-          onClick={() => onSelectTab('instant')}
+          onClick={() => onSelectTab("instant")}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-colors border ${
-            activeTab === 'instant'
-              ? 'bg-zinc-100 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium'
-              : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:border-zinc-300 dark:hover:border-zinc-700'
+            activeTab === "instant"
+              ? "bg-zinc-100 dark:bg-zinc-900 border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium"
+              : "bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:border-zinc-300 dark:hover:border-zinc-700"
           }`}
         >
           <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
@@ -71,8 +72,13 @@ export function PlaygroundHeader({
         <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono border border-emerald-200 dark:border-emerald-950/80 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
           <span>
-            Clean URL Policy: <strong className="font-semibold text-emerald-800 dark:text-emerald-300">Active</strong>{' '}
-            <span className="text-emerald-600/80 dark:text-emerald-500/80">(defaults purged)</span>
+            Clean URL Policy:{" "}
+            <strong className="font-semibold text-emerald-800 dark:text-emerald-300">
+              Active
+            </strong>{" "}
+            <span className="text-emerald-600/80 dark:text-emerald-500/80">
+              (defaults purged)
+            </span>
           </span>
         </div>
       </div>
@@ -88,7 +94,9 @@ export function PlaygroundHeader({
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-              <span className="text-emerald-600 dark:text-emerald-400 font-medium">Copied!</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-medium">
+                Copied!
+              </span>
             </>
           ) : (
             <>
@@ -117,8 +125,16 @@ export function PlaygroundHeader({
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors shadow-sm"
         >
           <Share2 className="w-3.5 h-3.5" />
-          <span>Share Preset</span>
+          <span>Apply Preset</span>
         </motion.button>
+
+        {/* Share Feature Button */}
+        <ShareFeatureButton
+          title="paramsync Interactive Playground"
+          description="Live sandbox testing real-time URL state synchronization and batch navigation updates."
+          url="https://paramsync.vercel.app/playground"
+          category="Playground"
+        />
       </div>
     </div>
   );

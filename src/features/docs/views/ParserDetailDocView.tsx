@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
-import { ParserDocItem } from '../types/doc-parser.types';
-import { DocsPaginationFooter } from '../components/DocsPaginationFooter';
-import { CodeBlock } from '@/components/shared/CodeBlock';
-import { ShareFeatureButton } from '@/components/shared/ShareFeatureButton';
-import { highlightCode, getTokenClass } from '@/lib/syntaxHighlighter';
+import React from "react";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
+import { ParserDocItem } from "../types/doc-parser.types";
+import { DocsPaginationFooter } from "../components/DocsPaginationFooter";
+import { CodeBlock } from "@/components/shared/CodeBlock";
+import { ShareFeatureButton } from "@/components/shared/ShareFeatureButton";
+import { highlightCode, getTokenClass } from "@/lib/syntaxHighlighter";
 
 interface ParserDetailDocViewProps {
   parser: ParserDocItem;
@@ -31,7 +31,7 @@ export function ParserDetailDocView({ parser }: ParserDetailDocViewProps) {
           <ShareFeatureButton
             title={parser.name}
             description={parser.summary}
-            url={`https://paramsync.dev/docs/parsers/${parser.slug}`}
+            url={`https://paramsync.vercel.app/docs/parsers/${parser.slug}`}
             category="Parser Reference"
           />
         </div>
@@ -55,20 +55,24 @@ export function ParserDetailDocView({ parser }: ParserDetailDocViewProps) {
                 TypeScript Signature
               </span>
             </div>
-            <span className="text-[10px] text-zinc-500 font-mono">IntelliSense</span>
+            <span className="text-[10px] text-zinc-500 font-mono">
+              IntelliSense
+            </span>
           </div>
           <div className="p-4 overflow-x-auto bg-white dark:bg-[#191b21] font-mono text-xs sm:text-sm">
             <pre className="m-0 leading-relaxed text-zinc-900 dark:text-zinc-100">
               <code>
-                {highlightCode(parser.signature, 'typescript').map((line, lIdx) => (
-                  <div key={lIdx}>
-                    {line.map((token, tIdx) => (
-                      <span key={tIdx} className={getTokenClass(token.type)}>
-                        {token.text}
-                      </span>
-                    ))}
-                  </div>
-                ))}
+                {highlightCode(parser.signature, "typescript").map(
+                  (line, lIdx) => (
+                    <div key={lIdx}>
+                      {line.map((token, tIdx) => (
+                        <span key={tIdx} className={getTokenClass(token.type)}>
+                          {token.text}
+                        </span>
+                      ))}
+                    </div>
+                  ),
+                )}
               </code>
             </pre>
           </div>
@@ -111,11 +115,25 @@ export function ParserDetailDocView({ parser }: ParserDetailDocViewProps) {
           How to use it properly
         </h2>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-3">
-          Import <code className="font-mono text-blue-600 dark:text-cyan-300 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">{parser.name}</code> from{' '}
-          <code className="font-mono text-amber-600 dark:text-amber-300 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">&apos;paramsync&apos;</code> and bind it to{' '}
-          <code className="font-mono text-blue-600 dark:text-cyan-300 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">useQueryState</code>:
+          Import{" "}
+          <code className="font-mono text-blue-600 dark:text-cyan-300 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">
+            {parser.name}
+          </code>{" "}
+          from{" "}
+          <code className="font-mono text-amber-600 dark:text-amber-300 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">
+            &apos;paramsync&apos;
+          </code>{" "}
+          and bind it to{" "}
+          <code className="font-mono text-blue-600 dark:text-cyan-300 bg-zinc-100 dark:bg-[#191b21] px-1.5 py-0.5 rounded border border-zinc-200 dark:border-[#383f4e]">
+            useQueryState
+          </code>
+          :
         </p>
-        <CodeBlock code={parser.codeExample} language="tsx" filename="Example.tsx" />
+        <CodeBlock
+          code={parser.codeExample}
+          language="tsx"
+          filename="Example.tsx"
+        />
 
         {parser.advancedExample && (
           <div className="mt-8">
@@ -154,16 +172,29 @@ export function ParserDetailDocView({ parser }: ParserDetailDocViewProps) {
           <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
             <thead>
               <tr className="border-b border-zinc-200 dark:border-[#2a2f3a] bg-zinc-50 dark:bg-[#23272f] font-sans text-xs text-zinc-700 dark:text-zinc-200">
-                <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">State Condition</th>
-                <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Clean URL Action</th>
-                <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Resulting URL</th>
+                <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                  State Condition
+                </th>
+                <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                  Clean URL Action
+                </th>
+                <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                  Resulting URL
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-200 dark:divide-[#2a2f3a]/80 text-zinc-700 dark:text-zinc-200">
               {parser.cleanUrlBehavior.rules.map((rule, idx) => (
-                <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-[#23272f]/40 transition-colors">
-                  <td className="p-3.5 sm:px-4 sm:py-3 text-zinc-900 dark:text-zinc-100 font-medium">{rule.condition}</td>
-                  <td className="p-3.5 sm:px-4 sm:py-3 text-zinc-600 dark:text-zinc-400 font-sans">{rule.behavior}</td>
+                <tr
+                  key={idx}
+                  className="hover:bg-zinc-50 dark:hover:bg-[#23272f]/40 transition-colors"
+                >
+                  <td className="p-3.5 sm:px-4 sm:py-3 text-zinc-900 dark:text-zinc-100 font-medium">
+                    {rule.condition}
+                  </td>
+                  <td className="p-3.5 sm:px-4 sm:py-3 text-zinc-600 dark:text-zinc-400 font-sans">
+                    {rule.behavior}
+                  </td>
                   <td className="p-3.5 sm:px-4 sm:py-3">
                     <span className="inline-block px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 font-mono text-xs max-w-[240px] sm:max-w-none truncate">
                       {rule.exampleUrl}
@@ -186,15 +217,24 @@ export function ParserDetailDocView({ parser }: ParserDetailDocViewProps) {
             <table className="w-full text-left text-xs sm:text-sm font-mono border-collapse">
               <thead>
                 <tr className="border-b border-zinc-200 dark:border-[#2a2f3a] bg-zinc-50 dark:bg-[#23272f] font-sans text-xs text-zinc-700 dark:text-zinc-200">
-                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Parameter</th>
+                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                    Parameter
+                  </th>
                   <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Type</th>
-                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Default</th>
-                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">Description</th>
+                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                    Default
+                  </th>
+                  <th className="p-3.5 sm:px-4 sm:py-3 font-semibold">
+                    Description
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-200 dark:divide-[#2a2f3a]/80 text-zinc-600 dark:text-zinc-300 font-sans">
                 {parser.parameters.map((param, idx) => (
-                  <tr key={idx} className="hover:bg-zinc-50 dark:hover:bg-[#23272f]/40 transition-colors">
+                  <tr
+                    key={idx}
+                    className="hover:bg-zinc-50 dark:hover:bg-[#23272f]/40 transition-colors"
+                  >
                     <td className="p-3.5 sm:px-4 sm:py-3 font-mono font-bold text-zinc-900 dark:text-white">
                       {param.name}
                     </td>
@@ -205,7 +245,7 @@ export function ParserDetailDocView({ parser }: ParserDetailDocViewProps) {
                     </td>
                     <td className="p-3.5 sm:px-4 sm:py-3">
                       <span className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 font-mono text-xs">
-                        {param.defaultValue || '-'}
+                        {param.defaultValue || "-"}
                       </span>
                     </td>
                     <td className="p-3.5 sm:px-4 sm:py-3 text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm">

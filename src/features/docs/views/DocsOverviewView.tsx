@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { ArrowRight, Code2, ShieldCheck, Zap, Layers } from 'lucide-react';
-import { CodeBlock } from '@/components/shared/CodeBlock';
-import { DocsPaginationFooter } from '../components/DocsPaginationFooter';
-import { parsersData } from '../data/parsers.data';
+import React from "react";
+import Link from "next/link";
+import { ArrowRight, Code2, ShieldCheck, Zap, Layers } from "lucide-react";
+import { CodeBlock } from "@/components/shared/CodeBlock";
+import { ShareFeatureButton } from "@/components/shared/ShareFeatureButton";
+import { DocsPaginationFooter } from "../components/DocsPaginationFooter";
+import { parsersData } from "../data/parsers.data";
 
 export function DocsOverviewView() {
   const parsersList = Object.values(parsersData);
@@ -14,18 +15,27 @@ export function DocsOverviewView() {
     <article className="w-full py-6 sm:py-10 px-2 sm:px-4 md:px-6 lg:px-8">
       {/* Header */}
       <header className="border-b border-zinc-200 dark:border-zinc-800 pb-8 mb-8">
-        <div className="flex items-center gap-2 mb-3 font-mono text-xs text-zinc-500">
-          <span>paramsync</span>
-          <span>&gt;</span>
-          <span className="text-zinc-700 dark:text-zinc-300">overview</span>
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <div className="flex items-center gap-2 font-mono text-xs text-zinc-500">
+            <span>paramsync</span>
+            <span>&gt;</span>
+            <span className="text-zinc-700 dark:text-zinc-300">overview</span>
+          </div>
+
+          <ShareFeatureButton
+            title="paramsync Documentation"
+            description="Type-safe URL Search Parameters state manager for React and Next.js."
+            url="https://paramsync.vercel.app/docs"
+            category="Documentation"
+          />
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
           paramsync Documentation
         </h1>
         <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-          A high-performance, type-safe URL Search Parameters state manager engineered for React 18+
-          and Next.js App Router applications.
+          A high-performance, type-safe URL Search Parameters state manager
+          engineered for React 18+ and Next.js App Router applications.
         </p>
 
         {/* Feature Highlights Grid */}
@@ -43,7 +53,8 @@ export function DocsOverviewView() {
               0ms Typing Lag
             </h2>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-              Local input state responds instantly while URL updates are smoothly debounced in the background.
+              Local input state responds instantly while URL updates are
+              smoothly debounced in the background.
             </p>
           </div>
 
@@ -60,7 +71,8 @@ export function DocsOverviewView() {
               Clean URL Policy
             </h2>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-              Empty strings, empty arrays, and defaults are purged automatically from query strings.
+              Empty strings, empty arrays, and defaults are purged automatically
+              from query strings.
             </p>
           </div>
 
@@ -77,7 +89,8 @@ export function DocsOverviewView() {
               Batch Transitions
             </h2>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-              Commit multi-filter drawer updates atomically in one single Next.js navigation transition.
+              Commit multi-filter drawer updates atomically in one single
+              Next.js navigation transition.
             </p>
           </div>
         </div>
@@ -104,7 +117,11 @@ export function DocsOverviewView() {
           Quick Start Example
         </h2>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-2">
-          Pair <code className="font-mono text-zinc-800 dark:text-zinc-200">useQueryState</code> with built-in parsers to bind state directly to URL search params:
+          Pair{" "}
+          <code className="font-mono text-zinc-800 dark:text-zinc-200">
+            useQueryState
+          </code>{" "}
+          with built-in parsers to bind state directly to URL search params:
         </p>
         <CodeBlock
           code={`'use client';
@@ -145,7 +162,8 @@ export default function SearchFeed() {
           Built-in Parsers Reference
         </h2>
         <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-          Each parser enforces strict runtime validation, TypeScript type narrowing, and Clean URL policy purging:
+          Each parser enforces strict runtime validation, TypeScript type
+          narrowing, and Clean URL policy purging:
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

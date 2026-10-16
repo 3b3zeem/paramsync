@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://paramsync.dev'),
+  metadataBase: new URL('https://paramsync.vercel.app'),
   title: {
     default: 'paramsync | Type-Safe URL Query State Manager for Next.js',
     template: '%s | paramsync',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://paramsync.dev',
+    url: 'https://paramsync.vercel.app',
     siteName: 'paramsync',
     title: 'paramsync | Type-Safe URL Query State Manager for Next.js',
     description:
@@ -53,7 +53,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <head>
         <script
@@ -62,7 +62,7 @@ export default function RootLayout({
               (function() {
                 try {
                   var saved = localStorage.getItem('paramsync-theme');
-                  var isDark = saved ? saved === 'dark' : false;
+                  var isDark = saved ? saved === 'dark' : true;
                   if (isDark) {
                     document.documentElement.classList.add('dark');
                     document.documentElement.classList.remove('light');

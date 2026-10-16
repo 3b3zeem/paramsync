@@ -1,8 +1,8 @@
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { parsersData, allParserSlugs } from '@/features/docs/data/parsers.data';
-import { ParserDetailDocView } from '@/features/docs/views/ParserDetailDocView';
-import { JsonLd } from '@/components/shared/JsonLd';
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { parsersData, allParserSlugs } from "@/features/docs/data/parsers.data";
+import { ParserDetailDocView } from "@/features/docs/views/ParserDetailDocView";
+import { JsonLd } from "@/components/shared/JsonLd";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -12,34 +12,36 @@ export async function generateStaticParams() {
   return allParserSlugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const parser = parsersData[slug];
-  if (!parser) return { title: 'Parser Not Found' };
+  if (!parser) return { title: "Parser Not Found" };
 
-  const canonicalUrl = `https://paramsync.dev/docs/parsers/${slug}`;
-  const ogImageUrl = `https://paramsync.dev/api/og?title=${encodeURIComponent(parser.name)}&category=Parser%20Reference&desc=${encodeURIComponent(parser.summary)}`;
+  const canonicalUrl = `https://paramsync.vercel.app/docs/parsers/${slug}`;
+  const ogImageUrl = `https://paramsync.vercel.app/api/og?title=${encodeURIComponent(parser.name)}&category=Parser%20Reference&desc=${encodeURIComponent(parser.summary)}`;
 
   return {
     title: `${parser.name} Parser Reference`,
     description: parser.summary,
     keywords: [
       parser.name,
-      'paramsync parser',
-      'nextjs query state',
-      'url search params',
-      'type safe query state',
-      'clean url policy',
-      'nextjs 15',
-      'react 19',
+      "paramsync parser",
+      "nextjs query state",
+      "url search params",
+      "type safe query state",
+      "clean url policy",
+      "nextjs 15",
+      "react 19",
     ],
     alternates: { canonical: canonicalUrl },
     openGraph: {
       title: `${parser.name} | paramsync Documentation`,
       description: parser.summary,
       url: canonicalUrl,
-      siteName: 'paramsync',
-      type: 'article',
+      siteName: "paramsync",
+      type: "article",
       images: [
         {
           url: ogImageUrl,
@@ -50,11 +52,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: `${parser.name} | paramsync`,
       description: parser.summary,
       images: [ogImageUrl],
-      creator: '@paramsync',
+      creator: "@paramsync",
     },
   };
 }
@@ -65,43 +67,43 @@ export default async function ParserDetailPage({ params }: PageProps) {
   if (!parser) notFound();
 
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
     headline: `${parser.name} Parser Reference | paramsync`,
     description: parser.summary,
-    url: `https://paramsync.dev/docs/parsers/${slug}`,
-    inLanguage: 'en-US',
+    url: `https://paramsync.vercel.app/docs/parsers/${slug}`,
+    inLanguage: "en-US",
     isPartOf: {
-      '@type': 'WebSite',
-      name: 'paramsync',
-      url: 'https://paramsync.dev',
+      "@type": "WebSite",
+      name: "paramsync",
+      url: "https://paramsync.vercel.app",
     },
     breadcrumb: {
-      '@type': 'BreadcrumbList',
+      "@type": "BreadcrumbList",
       itemListElement: [
         {
-          '@type': 'ListItem',
+          "@type": "ListItem",
           position: 1,
-          name: 'Home',
-          item: 'https://paramsync.dev',
+          name: "Home",
+          item: "https://paramsync.vercel.app",
         },
         {
-          '@type': 'ListItem',
+          "@type": "ListItem",
           position: 2,
-          name: 'Documentation',
-          item: 'https://paramsync.dev/docs',
+          name: "Documentation",
+          item: "https://paramsync.vercel.app/docs",
         },
         {
-          '@type': 'ListItem',
+          "@type": "ListItem",
           position: 3,
-          name: 'Parsers',
-          item: 'https://paramsync.dev/docs/parsers/parse-as-string',
+          name: "Parsers",
+          item: "https://paramsync.vercel.app/docs/parsers/parse-as-string",
         },
         {
-          '@type': 'ListItem',
+          "@type": "ListItem",
           position: 4,
           name: parser.name,
-          item: `https://paramsync.dev/docs/parsers/${slug}`,
+          item: `https://paramsync.vercel.app/docs/parsers/${slug}`,
         },
       ],
     },

@@ -13,7 +13,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -30,10 +30,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           document.documentElement.classList.remove('dark');
         }
       } else {
-        // Default to light mode as primary
-        setThemeState('light');
-        document.documentElement.classList.add('light');
-        document.documentElement.classList.remove('dark');
+        // Default to dark mode as primary
+        setThemeState('dark');
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
       }
     } catch {
       // Fallback

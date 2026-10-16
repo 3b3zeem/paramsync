@@ -1,33 +1,37 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { ShoppingBag, Table, FileSearch, ArrowRight } from 'lucide-react';
-import { CodeBlock } from '@/components/shared/CodeBlock';
+import React from "react";
+import Link from "next/link";
+import { ShoppingBag, Table, FileSearch, ArrowRight } from "lucide-react";
+import { CodeBlock } from "@/components/shared/CodeBlock";
+import { ShareFeatureButton } from "@/components/shared/ShareFeatureButton";
 
 const RECIPES = [
   {
-    title: 'E-Commerce Filter Drawer & Facets',
-    filename: 'EcommerceFilters.tsx',
-    description: 'Multi-category selection, price range sliders, in-stock toggles, and sorting with instant local feedback and zero keystroke lag.',
+    title: "E-Commerce Filter Drawer & Facets",
+    filename: "EcommerceFilters.tsx",
+    description:
+      "Multi-category selection, price range sliders, in-stock toggles, and sorting with instant local feedback and zero keystroke lag.",
     icon: ShoppingBag,
     code: `const [categories, setCategories] = useQueryState('cat', parseAsArray(parseAsString));
 const [price, setPrice] = useQueryState('price', parseAsNumberRange(0, 1000));
 const [inStock, setInStock] = useQueryState('stock', parseAsBoolean.withDefault(false));`,
   },
   {
-    title: 'Data Grid & Analytics Tables',
-    filename: 'AnalyticsGrid.tsx',
-    description: 'Column header sorting, page limit toggling, pagination bounds, and search filters with canonical page index resets.',
+    title: "Data Grid & Analytics Tables",
+    filename: "AnalyticsGrid.tsx",
+    description:
+      "Column header sorting, page limit toggling, pagination bounds, and search filters with canonical page index resets.",
     icon: Table,
     code: `const [sort, setSort] = useQueryState('sort', parseAsSort('createdAt', 'desc'));
 const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));
 const [limit, setLimit] = useQueryState('limit', parseAsInteger.withDefault(25));`,
   },
   {
-    title: 'Server Component (RSC) Data Fetching',
-    filename: 'CatalogPage.tsx',
-    description: 'Pass clean query parameters directly into async React Server Components and Route Handlers without client bundle overhead.',
+    title: "Server Component (RSC) Data Fetching",
+    filename: "CatalogPage.tsx",
+    description:
+      "Pass clean query parameters directly into async React Server Components and Route Handlers without client bundle overhead.",
     icon: FileSearch,
     code: `// app/catalog/page.tsx (Server Component)
 export default async function CatalogPage({ searchParams }) {
@@ -41,13 +45,23 @@ export default async function CatalogPage({ searchParams }) {
 export function UseCasesView() {
   return (
     <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 py-12">
-      <div className="mb-10">
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-          Real-World Recipes &amp; Patterns
-        </h1>
-        <p className="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
-          Production architectural patterns for e-commerce, enterprise dashboards, and React Server Components.
-        </p>
+      <div className="mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+            Real-World Recipes &amp; Patterns
+          </h1>
+          <p className="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+            Production architectural patterns for e-commerce, enterprise
+            dashboards, and React Server Components.
+          </p>
+        </div>
+
+        <ShareFeatureButton
+          title="Real-World Recipes & Patterns"
+          description="Production architectural patterns for e-commerce, dashboards, and RSC in paramsync."
+          url="https://paramsync.vercel.app/use-cases"
+          category="Use Cases"
+        />
       </div>
 
       <div className="space-y-8">
@@ -69,7 +83,11 @@ export function UseCasesView() {
               <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 max-w-3xl leading-relaxed">
                 {recipe.description}
               </p>
-              <CodeBlock code={recipe.code} language="tsx" filename={recipe.filename} />
+              <CodeBlock
+                code={recipe.code}
+                language="tsx"
+                filename={recipe.filename}
+              />
             </div>
           );
         })}
