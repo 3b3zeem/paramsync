@@ -169,7 +169,7 @@ export function Navbar() {
 
             {/* Desktop GitHub link */}
             <a
-              href="https://github.com/3b3zeem/paramsync"
+              href="https://github.com/3b3zeem/paramsync-lib"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub Repository"
@@ -268,7 +268,7 @@ export function Navbar() {
                     npm v1.0.4
                   </a>
                   <a
-                    href="https://github.com/3b3zeem/paramsync"
+                    href="https://github.com/3b3zeem/paramsync-lib"
                     target="_blank"
                     rel="noreferrer"
                     className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-zinc-200 dark:border-[#363c4a] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"

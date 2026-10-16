@@ -73,7 +73,7 @@ export function Footer() {
                 <span className="text-zinc-400 dark:text-zinc-500">v1.0.4</span>
               </a>
               <a
-                href="https://github.com/3b3zeem/paramsync"
+                href="https://github.com/3b3zeem/paramsync-lib"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-zinc-200 dark:border-[#363c4a] bg-white dark:bg-[#292e39] text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors"
@@ -199,7 +199,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/3b3zeem/paramsync/issues"
+                  href="https://github.com/3b3zeem/paramsync-lib/issues"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"

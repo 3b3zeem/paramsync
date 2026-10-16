@@ -174,7 +174,7 @@ export function StateInspector() {
             Telemetry &amp; Privacy
           </a>
           <a
-            href="https://github.com/3b3zeem/paramsync"
+            href="https://github.com/3b3zeem/paramsync-lib"
             target="_blank"
             rel="noreferrer"
             className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"

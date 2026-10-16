@@ -243,7 +243,7 @@ export function DocsSidebar({ className = "" }: DocsSidebarProps) {
               <div className="pt-4 mt-6 border-t border-zinc-200 dark:border-[#323846] text-[11px] font-mono text-zinc-500 flex items-center justify-between">
                 <span>paramsync v1.0.4</span>
                 <a
-                  href="https://github.com/3b3zeem/paramsync"
+                  href="https://github.com/3b3zeem/paramsync-lib"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
