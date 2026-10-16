@@ -164,7 +164,7 @@ export function Navbar() {
               className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded border border-zinc-200 dark:border-[#363c4a] bg-zinc-50 dark:bg-[#292e39] text-[11px] font-mono text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors"
             >
               <span>npm</span>
-              <span className="text-zinc-400 dark:text-zinc-500">1.0.3</span>
+              <span className="text-zinc-400 dark:text-zinc-500">1.0.4</span>
             </a>
 
             {/* Desktop GitHub link */}
@@ -265,7 +265,7 @@ export function Navbar() {
                     rel="noreferrer"
                     className="px-2.5 py-1 rounded border border-zinc-200 dark:border-[#363c4a] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
                   >
-                    npm v1.0.3
+                    npm v1.0.4
                   </a>
                   <a
                     href="https://github.com/3b3zeem/paramsync"

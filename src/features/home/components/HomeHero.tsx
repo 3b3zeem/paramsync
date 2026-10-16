@@ -79,7 +79,7 @@ export function HomeHero() {
           </div>
 
           <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-400 uppercase tracking-wider pr-1">
-            v1.0.3
+            v1.0.4
           </span>
         </div>
 

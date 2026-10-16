@@ -241,7 +241,7 @@ export function DocsSidebar({ className = "" }: DocsSidebarProps) {
 
               {/* Drawer Footer */}
               <div className="pt-4 mt-6 border-t border-zinc-200 dark:border-[#323846] text-[11px] font-mono text-zinc-500 flex items-center justify-between">
-                <span>paramsync v1.0.3</span>
+                <span>paramsync v1.0.4</span>
                 <a
                   href="https://github.com/3b3zeem/paramsync"
                   target="_blank"

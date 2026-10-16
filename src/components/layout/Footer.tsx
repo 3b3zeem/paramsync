@@ -70,7 +70,7 @@ export function Footer() {
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-zinc-200 dark:border-[#363c4a] bg-white dark:bg-[#292e39] text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors"
               >
                 <span>npm</span>
-                <span className="text-zinc-400 dark:text-zinc-500">v1.0.3</span>
+                <span className="text-zinc-400 dark:text-zinc-500">v1.0.4</span>
               </a>
               <a
                 href="https://github.com/3b3zeem/paramsync"
