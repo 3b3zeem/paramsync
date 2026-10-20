@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { ArrowUp, Terminal, ShieldCheck, Zap } from 'lucide-react';
-import { Logo } from '@/components/shared/Logo';
+import React from "react";
+import Link from "next/link";
+import { ArrowUp, Terminal, ShieldCheck, Zap, Star } from "lucide-react";
+import { Logo } from "@/components/shared/Logo";
+import { usePackageStats } from "@/hooks/usePackageStats";
 
-function GithubIcon({ className = 'w-4 h-4' }: { className?: string }) {
+function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -23,9 +24,10 @@ function GithubIcon({ className = 'w-4 h-4' }: { className?: string }) {
 }
 
 export function Footer() {
+  const { version, stars } = usePackageStats();
   const scrollToTop = () => {
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -41,8 +43,10 @@ export function Footer() {
             </Link>
 
             <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400 max-w-sm">
-              Type-safe URL Search Parameters state manager engineered specifically for React 18+ and Next.js App Router.
-              Delivers 0ms input latency, automatic Clean URL parameter purging, and atomic batch transitions.
+              Type-safe URL Search Parameters state manager engineered
+              specifically for React 18+ and Next.js App Router. Delivers 0ms
+              input latency, automatic Clean URL parameter purging, and atomic
+              batch transitions.
             </p>
 
             {/* Feature Pills */}
@@ -70,7 +74,12 @@ export function Footer() {
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-zinc-200 dark:border-[#363c4a] bg-white dark:bg-[#292e39] text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors"
               >
                 <span>npm</span>
-                <span className="text-zinc-400 dark:text-zinc-500">v1.0.4</span>
+                <span
+                  suppressHydrationWarning
+                  className="text-zinc-400 dark:text-zinc-500"
+                >
+                  v{version}
+                </span>
               </a>
               <a
                 href="https://github.com/3b3zeem/paramsync-lib"
@@ -80,8 +89,14 @@ export function Footer() {
               >
                 <GithubIcon className="w-3 h-3" />
                 <span>GitHub</span>
+                <span className="flex items-center gap-0.5 text-zinc-400 dark:text-zinc-500 pl-1 border-l border-zinc-200 dark:border-zinc-700">
+                  <Star className="w-2.5 h-2.5" />
+                  <span suppressHydrationWarning>{stars}</span>
+                </span>
               </a>
-              <span className="text-zinc-400 dark:text-zinc-600 text-xs">MIT License</span>
+              <span className="text-zinc-400 dark:text-zinc-600 text-xs">
+                MIT License
+              </span>
             </div>
           </div>
 
@@ -92,32 +107,50 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-xs font-sans">
               <li>
-                <Link href="/docs" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   Overview
                 </Link>
               </li>
               <li>
-                <Link href="/docs/installation" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/installation"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   Installation
                 </Link>
               </li>
               <li>
-                <Link href="/docs/quick-start" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/quick-start"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   Quick Start Tutorial
                 </Link>
               </li>
               <li>
-                <Link href="/docs/concepts/clean-url-policy" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/concepts/clean-url-policy"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   Clean URL Policy
                 </Link>
               </li>
               <li>
-                <Link href="/docs/concepts/suspense-boundaries" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/concepts/suspense-boundaries"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   Suspense Boundaries
                 </Link>
               </li>
               <li>
-                <Link href="/docs/faq" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/faq"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   FAQ & Troubleshooting
                 </Link>
               </li>
@@ -131,37 +164,58 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-xs font-mono">
               <li>
-                <Link href="/docs/parsers/parse-as-string" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/parsers/parse-as-string"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   parseAsString
                 </Link>
               </li>
               <li>
-                <Link href="/docs/parsers/parse-as-integer" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/parsers/parse-as-integer"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   parseAsInteger
                 </Link>
               </li>
               <li>
-                <Link href="/docs/parsers/parse-as-float" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/parsers/parse-as-float"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   parseAsFloat
                 </Link>
               </li>
               <li>
-                <Link href="/docs/parsers/parse-as-boolean" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/parsers/parse-as-boolean"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   parseAsBoolean
                 </Link>
               </li>
               <li>
-                <Link href="/docs/parsers/parse-as-array" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/parsers/parse-as-array"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   parseAsArray
                 </Link>
               </li>
               <li>
-                <Link href="/docs/parsers/parse-as-number-range" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/parsers/parse-as-number-range"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   parseAsNumberRange
                 </Link>
               </li>
               <li>
-                <Link href="/docs/parsers/create-parser" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/parsers/create-parser"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   createParser (Custom)
                 </Link>
               </li>
@@ -175,7 +229,10 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-xs font-sans">
               <li>
-                <Link href="/playground" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors flex items-center gap-1.5">
+                <Link
+                  href="/playground"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors flex items-center gap-1.5"
+                >
                   <span>Interactive Sandbox</span>
                   <span className="text-[10px] font-mono px-1 py-0.2 rounded bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300">
                     Live
@@ -183,19 +240,48 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/use-cases" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/use-cases"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   Real-World Use Cases
                 </Link>
               </li>
               <li>
-                <Link href="/docs/hooks/use-query-state" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/hooks/use-query-state"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   useQueryState Hook
                 </Link>
               </li>
               <li>
-                <Link href="/docs/hooks/use-batch-query-params" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+                <Link
+                  href="/docs/hooks/use-batch-query-params"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
                   useBatchQueryParams Hook
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/3b3zeem/paramsync-lib"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
+                  Library Repository
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/3b3zeem/paramsync"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
+                  Website Repository
+                </a>
               </li>
               <li>
                 <a
@@ -216,7 +302,9 @@ export function Footer() {
       <div className="w-full border-t border-zinc-200 dark:border-[#2a2f3a] bg-white/50 dark:bg-[#15171c] py-4">
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-500 dark:text-zinc-400">
           <div className="flex items-center gap-2">
-            <span className="text-zinc-800 dark:text-zinc-200 font-medium">paramsync</span>
+            <span className="text-zinc-800 dark:text-zinc-200 font-medium">
+              paramsync
+            </span>
             <span>&copy; {new Date().getFullYear()}</span>
             <span>&bull;</span>
             <span>Released under MIT License</span>

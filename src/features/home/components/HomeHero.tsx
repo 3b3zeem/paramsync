@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, Copy } from "lucide-react";
+import { ArrowRight, Check, Copy, Download, Star } from "lucide-react";
 import { PackageManager } from "../types/home.types";
 import { Logo } from "@/components/shared/Logo";
+import { usePackageStats } from "@/hooks/usePackageStats";
 
 const INSTALL_COMMANDS: Record<PackageManager, string> = {
   npm: "npm install paramsync",
@@ -14,6 +15,7 @@ const INSTALL_COMMANDS: Record<PackageManager, string> = {
 };
 
 export function HomeHero() {
+  const { version, downloads, stars } = usePackageStats();
   const [pm, setPm] = useState<PackageManager>("npm");
   const [copied, setCopied] = useState(false);
 
@@ -83,8 +85,8 @@ export function HomeHero() {
             ))}
           </div>
 
-          <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-400 uppercase tracking-wider pr-1">
-            v1.0.4
+          <span suppressHydrationWarning className="text-[10px] font-mono text-zinc-400 dark:text-zinc-400 uppercase tracking-wider pr-1">
+            v{version}
           </span>
         </div>
 
@@ -112,6 +114,29 @@ export function HomeHero() {
             )}
           </button>
         </div>
+      </div>
+
+      {/* Package Metrics */}
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+        <a
+          href="https://www.npmjs.com/package/paramsync"
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+        >
+          <Download className="w-3.5 h-3.5" />
+          <span suppressHydrationWarning>{downloads.toLocaleString()} monthly downloads</span>
+        </a>
+        <span className="text-zinc-300 dark:text-zinc-700 select-none hidden sm:inline">•</span>
+        <a
+          href="https://github.com/3b3zeem/paramsync-lib"
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+        >
+          <Star className="w-3.5 h-3.5" />
+          <span suppressHydrationWarning>{stars.toLocaleString()} GitHub stars</span>
+        </a>
       </div>
     </section>
   );

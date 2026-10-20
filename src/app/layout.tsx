@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { PackageStatsProvider } from '@/providers/PackageStatsProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -56,7 +58,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <head>
-        <script
+        <Script
+          id="theme-initializer"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -81,9 +85,11 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-white dark:bg-[#191b21] text-zinc-900 dark:text-zinc-100"
       >
         <ThemeProvider>
-          <Navbar />
-          <div className="flex-1 flex flex-col">{children}</div>
-          <Footer />
+          <PackageStatsProvider>
+            <Navbar />
+            <div className="flex-1 flex flex-col">{children}</div>
+            <Footer />
+          </PackageStatsProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -4,8 +4,9 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, Menu, X, Search } from "lucide-react";
+import { Sun, Moon, Menu, X, Search, Star } from "lucide-react";
 import { useTheme } from "@/providers/ThemeProvider";
+import { usePackageStats } from "@/hooks/usePackageStats";
 import { CommandPalette } from "@/components/shared/CommandPalette";
 import { Logo } from "@/components/shared/Logo";
 
@@ -29,6 +30,7 @@ function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {
 export function Navbar() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const { version, stars } = usePackageStats();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -164,7 +166,7 @@ export function Navbar() {
               className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded border border-zinc-200 dark:border-[#363c4a] bg-zinc-50 dark:bg-[#292e39] text-[11px] font-mono text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors"
             >
               <span>npm</span>
-              <span className="text-zinc-400 dark:text-zinc-500">1.0.4</span>
+              <span suppressHydrationWarning className="text-zinc-400 dark:text-zinc-500">v{version}</span>
             </a>
 
             {/* Desktop GitHub link */}
@@ -173,10 +175,16 @@ export function Navbar() {
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub Repository"
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#292e39] transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-[#363c4a]"
+              className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-md text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#292e39] transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-[#363c4a]"
             >
-              <GithubIcon className="w-4 h-4" />
-              <span>GitHub</span>
+              <div className="flex items-center gap-1.5">
+                <GithubIcon className="w-4 h-4" />
+                <span>GitHub</span>
+              </div>
+              <span className="flex items-center gap-1 pl-1.5 border-l border-zinc-200 dark:border-zinc-700 text-[11px] text-zinc-500 dark:text-zinc-400">
+                <Star className="w-3 h-3 text-zinc-400 dark:text-zinc-400" />
+                <span suppressHydrationWarning>{stars}</span>
+              </span>
             </a>
 
             {/* Mobile Hamburger Toggle Button */}
@@ -263,18 +271,23 @@ export function Navbar() {
                     href="https://www.npmjs.com/package/paramsync"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-2.5 py-1 rounded border border-zinc-200 dark:border-[#363c4a] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                    suppressHydrationWarning
+                    className="px-2.5 py-1 rounded border border-zinc-200 dark:border-[#363c4a] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-mono"
                   >
-                    npm v1.0.4
+                    npm v{version}
                   </a>
                   <a
                     href="https://github.com/3b3zeem/paramsync-lib"
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-zinc-200 dark:border-[#363c4a] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-zinc-200 dark:border-[#363c4a] text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-mono"
                   >
                     <GithubIcon className="w-3.5 h-3.5" />
                     <span>GitHub</span>
+                    <span className="flex items-center gap-0.5 text-zinc-400 dark:text-zinc-500 pl-1 border-l border-zinc-200 dark:border-zinc-700">
+                      <Star className="w-2.5 h-2.5" />
+                      <span suppressHydrationWarning>{stars}</span>
+                    </span>
                   </a>
                 </div>
               </div>

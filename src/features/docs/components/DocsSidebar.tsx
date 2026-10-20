@@ -9,6 +9,7 @@ import {
   docsNavigationConfig,
   flatDocsNavigation,
 } from "../config/docs-navigation.config";
+import { usePackageStats } from "@/hooks/usePackageStats";
 
 interface DocsSidebarProps {
   className?: string;
@@ -16,6 +17,7 @@ interface DocsSidebarProps {
 
 export function DocsSidebar({ className = "" }: DocsSidebarProps) {
   const pathname = usePathname();
+  const { version } = usePackageStats();
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   // Keep track of which groups are open. Default all open for rapid developer discovery.
@@ -241,15 +243,26 @@ export function DocsSidebar({ className = "" }: DocsSidebarProps) {
 
               {/* Drawer Footer */}
               <div className="pt-4 mt-6 border-t border-zinc-200 dark:border-[#323846] text-[11px] font-mono text-zinc-500 flex items-center justify-between">
-                <span>paramsync v1.0.4</span>
-                <a
-                  href="https://github.com/3b3zeem/paramsync-lib"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
-                >
-                  GitHub
-                </a>
+                <span suppressHydrationWarning>paramsync v{version}</span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://github.com/3b3zeem/paramsync-lib"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
+                  >
+                    Library
+                  </a>
+                  <span className="text-zinc-300 dark:text-zinc-700 select-none">&bull;</span>
+                  <a
+                    href="https://github.com/3b3zeem/paramsync"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
+                  >
+                    Website
+                  </a>
+                </div>
               </div>
             </motion.div>
           </div>

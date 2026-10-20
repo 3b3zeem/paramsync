@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/paramsync"><img src="https://img.shields.io/npm/v/paramsync.svg?style=flat&color=2563eb" alt="npm version" /></a>
   <a href="https://www.npmjs.com/package/paramsync"><img src="https://img.shields.io/npm/dm/paramsync.svg?style=flat&color=3b82f6" alt="npm downloads" /></a>
-  <a href="https://github.com/3b3zeem/paramsync"><img src="https://img.shields.io/github/license/3b3zeem/paramsync?style=flat&color=10b981" alt="license" /></a>
+  <a href="https://github.com/3b3zeem/paramsync-lib"><img src="https://img.shields.io/github/license/3b3zeem/paramsync-lib?style=flat&color=10b981" alt="license" /></a>
   <img src="https://img.shields.io/badge/TypeScript-5+-3178c6.svg?style=flat" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Next.js-14%20%7C%2015-black.svg?style=flat" alt="Next.js" />
   <img src="https://img.shields.io/badge/React-18%20%7C%2019-61dafb.svg?style=flat" alt="React" />
