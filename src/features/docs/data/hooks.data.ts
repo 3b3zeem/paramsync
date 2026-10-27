@@ -156,7 +156,7 @@ reset();`,
       {
         name: 'resetAllParams',
         type: '(preserveKeys?: string[], navOptions?: BatchNavigationOptions) => void',
-        description: 'Removes all query parameters from the URL at once, optionally preserving specific keys like ?tab= or ?utm_source=.',
+        description: 'Removes all query parameters from the URL at once while preserving specific keys. Instantly resets the internal state of all active useQueryState hooks on the page and cancels pending debounce timers (0ms UI latency).',
       },
       {
         name: 'isPending',

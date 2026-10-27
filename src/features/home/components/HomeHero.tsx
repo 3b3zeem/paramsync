@@ -37,13 +37,11 @@ export function HomeHero() {
         <Logo className="w-32 h-32 mx-auto" />
       </div>
       <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white max-w-4xl mx-auto leading-[1.15] text-center">
-        Type-Safe URL Query State Manager for Next.js
+        Type-Safe URL Query State Manager for React & Next.js
       </h1>
 
       <p className="mt-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed">
-        Zero typing lag, automated Clean URL parameter purging, and atomic batch
-        transitions engineered specifically for modern Next.js App Router
-        applications.
+        Zero typing lag, automated Clean URL parameter purging, race condition protection, and router-agnostic support across Vite, React Router, Remix, and Next.js App Router.
       </p>
 
       {/* Action Buttons */}

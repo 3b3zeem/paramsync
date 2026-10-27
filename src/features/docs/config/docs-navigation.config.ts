@@ -31,6 +31,24 @@ export const docsNavigationConfig: NavGroup[] = [
         description: 'Text inputs, search keywords, tab keys, and single-value query parameters',
       },
       {
+        title: 'parseAsStringLiteral',
+        href: '/docs/parsers/parse-as-string-literal',
+        badge: 'TypeScript',
+        description: 'Type-safe string literal unions (enums, statuses, tabs) without type casting',
+      },
+      {
+        title: 'parseAsIsoDate',
+        href: '/docs/parsers/parse-as-iso-date',
+        badge: 'Calendar',
+        description: 'Two-way conversion between JavaScript Date objects and YYYY-MM-DD strings',
+      },
+      {
+        title: 'parseAsJson',
+        href: '/docs/parsers/parse-as-json',
+        badge: 'Structured',
+        description: 'Safely parse and stringify complex objects and filter configurations with URI error guards',
+      },
+      {
         title: 'parseAsInteger',
         href: '/docs/parsers/parse-as-integer',
         badge: 'Built-in',
@@ -92,6 +110,16 @@ export const docsNavigationConfig: NavGroup[] = [
   {
     title: 'CORE CONCEPTS',
     items: [
+      {
+        title: 'Race Condition Protection',
+        href: '/docs/concepts/race-condition-protection',
+        description: 'How paramsync prevents debounced inputs from overwriting concurrent URL updates',
+      },
+      {
+        title: 'Router-Agnostic & Adapters',
+        href: '/docs/concepts/router-agnostic',
+        description: 'Using paramsync with Vite, React Router, Remix, TanStack Router, or Next.js App Router',
+      },
       {
         title: 'Clean URL Policy',
         href: '/docs/concepts/clean-url-policy',

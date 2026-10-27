@@ -15,6 +15,25 @@ interface FAQItem {
 
 const FAQ_ITEMS: FAQItem[] = [
   {
+    id: "router-agnostic",
+    category: "Architecture",
+    q: "Can I use paramsync in Vite, React Router, Remix, or plain React apps?",
+    a: "Yes! paramsync is completely router-agnostic. The default entrypoint (paramsync) works in any React application using standard browser history (pushState/replaceState) with zero external dependencies and zero npm warnings. If you are using Next.js App Router, simply import from paramsync/next for full RSC transition integration.",
+  },
+  {
+    id: "race-condition-fix",
+    category: "Performance",
+    q: "How does paramsync prevent race conditions between debounced search and immediate button clicks?",
+    a: "Standard hooks read searchParams from stale render closures. When a search timer fires 300ms later, it can erase recent page clicks. paramsync maintains an in-memory URL coordinator that tracks committed parameters across all active hooks, guaranteeing that debounced search updates apply cleanly on top of the latest URL without wiping out other parameters.",
+  },
+  {
+    id: "arabic-unicode-safe",
+    category: "General",
+    q: "Does paramsync support Arabic characters, unicode, and malformed percent encodings?",
+    a: "Yes. All parsers safely handle Arabic words, spaces, and unicode symbols. Decoding is wrapped in safe try/catch guards so malformed percent sequences like ?q=50% never throw URIError or crash your application.",
+  },
+
+  {
     id: "diff-nuqs",
     category: "General",
     q: "How is paramsync different from nuqs or other query managers?",

@@ -13,6 +13,78 @@ export interface ConceptDocItem {
 }
 
 export const conceptsData: Record<string, ConceptDocItem> = {
+  'race-condition-protection': {
+    slug: 'race-condition-protection',
+    title: 'Race Condition & Stale searchParams Protection',
+    summary:
+      'How paramsync coordinates concurrent debounced inputs and immediate clicks without overwriting URL parameters.',
+    problem:
+      'In standard React and Next.js applications, combining a debounced input (like live search with 400ms delay) with an immediate interaction (like clicking page 2 or toggling a category) causes severe race conditions. When the user types and immediately clicks page 2, the page hook updates the URL to ?page=2. Later, when the search debounce timer fires, its closure still holds the stale searchParams (which lacked page=2), completely wiping out page=2 from the address bar!',
+    solution:
+      'paramsync resolves this with a centralized, in-memory URL state coordinator. When committing to the URL, it reads the latest committed parameters rather than relying on stale closure variables. If page 2 was committed during the debounce delay, the search hook applies its parameter on top of page 2, producing ?page=2&q=shoes without losing any state.',
+    keyTakeaways: [
+      'No Parameter Overwrites: Debounced search inputs and immediate button clicks seamlessly coexist.',
+      'In-Memory Coordinator: Tracks the latest committed URL search parameters across all active hooks.',
+      'Microtask Batching: Coalesces concurrent state updates occurring in the same execution tick into a single navigation.',
+      'batchUpdates Utility: Allows grouping multiple useQueryState calls into one atomic transition.',
+    ],
+    codeSnippet: [
+      "'use client';",
+      "",
+      "import { useQueryState, parseAsString, parseAsInteger } from 'paramsync';",
+      "",
+      "export function SearchAndPaginate() {",
+      "  // Hook 1: 400ms debounced search",
+      "  const [search, setSearch] = useQueryState('q', parseAsString.withDefault(''), {",
+      "    debounceMs: 400,",
+      "  });",
+      "",
+      "  // Hook 2: Immediate pagination",
+      "  const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));",
+      "",
+      "  return <div>...</div>;",
+      "}"
+    ].join('\n'),
+    deepDiveSections: [
+      {
+        heading: 'The Stale Closure Bug Explained',
+        content:
+          'Standard hooks read searchParams from render closures. When a timer fires 400ms later, the captured searchParams snapshot is already out of date if other hooks executed in between. paramsync maintains an in-memory coordinator that updates eagerly upon every commit, ensuring subsequent commits build on top of the real URL state.',
+      },
+    ],
+  },
+
+  'router-agnostic': {
+    slug: 'router-agnostic',
+    title: 'Router-Agnostic Core & Adapters',
+    summary:
+      'Universal URL state management across Vite, React Router, Remix, TanStack Router, Astro, and Next.js App Router.',
+    problem:
+      'Most URL state libraries are hardcoded to Next.js by importing directly from next/navigation. This prevents developers from using them in Vite, React Router, Remix, or Astro without bundling warnings, peer dependency conflicts, or runtime crashes.',
+    solution:
+      'paramsync features a router-agnostic core architecture. The default entrypoint (paramsync) uses standard Vanilla browser history (window.history.pushState / replaceState with popstate dispatch) with zero external router dependencies. For Next.js App Router applications, paramsync/next provides dedicated Server Component transitions and useRouter integration.',
+    keyTakeaways: [
+      'Universal Support: Runs in Vite, React Router, Remix, Astro, TanStack Router, and plain React.',
+      'Optional Peer Dependencies: next is declared as optional, so npm install produces zero warnings.',
+      'Dual Entrypoints: Import from paramsync for router-agnostic apps, or from paramsync/next for Next.js App Router.',
+      'Extensible Adapter Interface: Custom routers can be plugged in via RouterAdapter.',
+    ],
+    codeSnippet: [
+      "// 1. Plain React / Vite / React Router / Remix / TanStack Router:",
+      "import { useQueryState, parseAsString } from 'paramsync';",
+      "",
+      "// 2. Next.js App Router with Server Components:",
+      "import { useQueryState, parseAsString } from 'paramsync/next';"
+    ].join('\n'),
+    deepDiveSections: [
+      {
+        heading: 'Vanilla History Adapter Mechanics',
+        content:
+          'In browser environments without Next.js, paramsync uses window.history.replaceState() and dispatches custom paramsync:navigate events alongside popstate. All active useQueryState hooks on the page subscribe to these events and synchronize their local state instantaneously.',
+      },
+    ],
+  },
+
   "clean-url-policy": {
     slug: "clean-url-policy",
     title: "Clean URL Policy",

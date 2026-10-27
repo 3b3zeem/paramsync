@@ -7,6 +7,19 @@ import { ComparisonItem } from '../types/home.types';
 
 const COMPARISON_ITEMS: ComparisonItem[] = [
   {
+    category: 'Concurrency & Debounce',
+    highlight: 'No Race Conditions',
+    vanilla: 'Debounced search firing 300ms later wipes out recent page click (?page=2).',
+    paramsync: 'Coordinated URL manager guarantees debounced inputs never overwrite concurrent changes.',
+  },
+  {
+    category: 'Framework Support',
+    highlight: 'Router-Agnostic',
+    vanilla: 'Hard-coded to next/navigation; crashes or warns in Vite / React Router.',
+    paramsync: 'Dual entrypoints: paramsync (Vanilla / any React app) and paramsync/next.',
+  },
+
+  {
     category: 'Typing Performance',
     highlight: '0ms Feedback',
     vanilla: 'Stutters typing keystrokes by re-rendering on every router push.',
@@ -37,7 +50,7 @@ export function HomeComparison() {
     <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 py-16 bg-zinc-50 dark:bg-[#191b21] text-zinc-900 dark:text-white border-b border-zinc-200 dark:border-[#2a2f3a] transition-colors">
       <div className="max-w-4xl mx-auto text-center mb-12">
         <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-3">
-          Why paramsync vs Vanilla Next.js?
+          Why paramsync vs Standard Query State?
         </h2>
         <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto leading-relaxed">
           Standard Next.js <code className="font-mono text-xs text-zinc-800 dark:text-zinc-200 bg-zinc-200/70 dark:bg-[#23272f] px-1 py-0.5 rounded border border-zinc-300 dark:border-[#383f4e]">useSearchParams()</code> is low-level and read-only. paramsync solves all modern URL state challenges out-of-the-box.

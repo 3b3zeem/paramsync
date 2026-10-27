@@ -1,14 +1,245 @@
 import { ParserDocItem } from '../types/doc-parser.types';
 
 export const parsersData: Record<string, ParserDocItem> = {
+  'parse-as-string-literal': {
+    slug: 'parse-as-string-literal',
+    name: 'parseAsStringLiteral',
+    signature: 'parseAsStringLiteral<T extends string>(allowedValues: readonly T[] | T[]): Parser<T | null>',
+    returnType: 'T | null (or T with .withDefault())',
+    summary: 'Type-safe parser for string literal unions. Guarantees 100% TypeScript type safety without manual type casting.',
+    whatItDoes:
+      'Constrains query parameters to a fixed list of allowed literal values (e.g. [\'all\', \'pending\', \'accepted\', \'rejected\']). If a user alters the URL parameter to an unrecognized value, it automatically falls back to your specified default value, protecting your UI components from invalid states.',
+    bestFor: [
+      'Filter status selectors and tab switches',
+      'Entity approval states (pending, approved, rejected)',
+      'Display modes (grid, list, kanban)',
+      'Enum-like URL parameters requiring strict TypeScript union types',
+    ],
+    cleanUrlBehavior: {
+      rule: 'Omitted when matching default value or invalid',
+      description: 'Omits the parameter when it matches the default option or contains an illegal string.',
+      rules: [
+        {
+          condition: 'value === defaultValue',
+          behavior: 'Key removed from URL',
+          exampleUrl: 'https://example.com/orders (clean)',
+        },
+        {
+          condition: 'value is not in allowedValues (e.g. ?status=hacked)',
+          behavior: 'Automatically falls back to defaultValue and purges invalid key',
+          exampleUrl: 'https://example.com/orders (clean)',
+        },
+        {
+          condition: 'value === "pending"',
+          behavior: 'Serialized as query param',
+          exampleUrl: 'https://example.com/orders?status=pending',
+        },
+      ],
+    },
+    parameters: [
+      {
+        name: 'allowedValues',
+        type: 'readonly T[] | T[]',
+        required: true,
+        description: 'Array or tuple of permitted string literal values. Use as const for strict inference.',
+      },
+    ],
+    codeExample: [
+      "'use client';",
+      "",
+      "import { useQueryState, parseAsStringLiteral } from 'paramsync';",
+      "",
+      "type OrderStatus = 'all' | 'pending' | 'shipped' | 'delivered';",
+      "",
+      "export function OrderStatusFilter() {",
+      "  // Infer type: 'all' | 'pending' | 'shipped' | 'delivered' without type casting!",
+      "  const [status, setStatus] = useQueryState(",
+      "    'status',",
+      "    parseAsStringLiteral(['all', 'pending', 'shipped', 'delivered'] as const).withDefault('all')",
+      "  );",
+      "",
+      "  return (",
+      "    <select value={status} onChange={(e) => setStatus(e.target.value as OrderStatus)}>",
+      "      <option value=\"all\">All Orders</option>",
+      "      <option value=\"pending\">Pending</option>",
+      "      <option value=\"shipped\">Shipped</option>",
+      "      <option value=\"delivered\">Delivered</option>",
+      "    </select>",
+      "  );",
+      "}"
+    ].join('\n'),
+    advancedExample: [
+      "// Arabic literals supported natively!",
+      "const roles = ['مدير', 'مشرف', 'مستخدم'] as const;",
+      "const [role, setRole] = useQueryState('role', parseAsStringLiteral(roles).withDefault('مستخدم'));"
+    ].join('\n'),
+    relatedParsers: [
+      { name: 'parseAsString', href: '/docs/parsers/parse-as-string' },
+      { name: 'useQueryState', href: '/docs/hooks/use-query-state' },
+    ],
+  },
+
+  'parse-as-iso-date': {
+    slug: 'parse-as-iso-date',
+    name: 'parseAsIsoDate',
+    signature: 'parseAsIsoDate: Parser<Date | null>',
+    returnType: 'Date | null (or Date with .withDefault())',
+    summary: 'Calendar date parser converting between Date objects and YYYY-MM-DD query strings with strict validation.',
+    whatItDoes:
+      'Converts JavaScript Date objects to clean YYYY-MM-DD query parameters and parses them back into valid Date objects. Features strict validation against non-existent dates (e.g. Feb 31), months out of bounds (1-12), and leap years. Automatically implements deep millisecond equality under the Clean URL Policy.',
+    bestFor: [
+      'Date range filter pickers (from/to dates)',
+      'Calendar day viewers and daily logs',
+      'Booking and reservation filters',
+      'Financial statement date selectors',
+    ],
+    cleanUrlBehavior: {
+      rule: 'Omitted when matching default Date or invalid',
+      description: 'Omits the parameter when the selected date matches the default date timestamp.',
+      rules: [
+        {
+          condition: 'date.getTime() === defaultDate.getTime()',
+          behavior: 'Key removed from URL',
+          exampleUrl: 'https://example.com/trips (clean)',
+        },
+        {
+          condition: 'invalid date string (e.g. 2026-02-31)',
+          behavior: 'Reverts to default date and omits invalid key',
+          exampleUrl: 'https://example.com/trips (clean)',
+        },
+        {
+          condition: 'date === 2026-10-27',
+          behavior: 'Serialized as YYYY-MM-DD',
+          exampleUrl: 'https://example.com/trips?date_from=2026-10-27',
+        },
+      ],
+    },
+    parameters: [
+      {
+        name: 'defaultValue',
+        type: 'Date',
+        required: false,
+        description: 'Optional default Date object passed to .withDefault(fallbackDate).',
+      },
+    ],
+    codeExample: [
+      "'use client';",
+      "",
+      "import { useQueryState, parseAsIsoDate } from 'paramsync';",
+      "",
+      "export function DateFilter() {",
+      "  const [dateFrom, setDateFrom] = useQueryState(",
+      "    'date_from',",
+      "    parseAsIsoDate.withDefault(new Date(2026, 0, 1))",
+      "  );",
+      "",
+      "  return (",
+      "    <input",
+      "      type=\"date\"",
+      "      value={dateFrom ? parseAsIsoDate.serialize(dateFrom) : ''}",
+      "      onChange={(e) => setDateFrom(e.target.value ? new Date(e.target.value) : null)}",
+      "    />",
+      "  );",
+      "}"
+    ].join('\n'),
+    advancedExample: [
+      "// Batch date ranges with useBatchQueryParams",
+      "const { setBatchParams } = useBatchQueryParams();",
+      "setBatchParams({",
+      "  from: { value: new Date(2026, 9, 1), parser: parseAsIsoDate },",
+      "  to: { value: new Date(2026, 9, 31), parser: parseAsIsoDate },",
+      "});"
+    ].join('\n'),
+    relatedParsers: [
+      { name: 'parseAsString', href: '/docs/parsers/parse-as-string' },
+      { name: 'parseAsNumberRange', href: '/docs/parsers/parse-as-number-range' },
+    ],
+  },
+
+  'parse-as-json': {
+    slug: 'parse-as-json',
+    name: 'parseAsJson',
+    signature: 'parseAsJson<T>(validator?: (data: unknown) => boolean): Parser<T | null>',
+    returnType: 'T | null (or T with .withDefault())',
+    summary: 'Structured object parser serializing and deserializing JSON with safe URL decoding and error guards.',
+    whatItDoes:
+      'Serializes complex objects using JSON.stringify and parses them using JSON.parse. Features safe URI decoding so malformed percent characters or syntax errors never throw URIError or crash your application. Supports an optional runtime validator function to ensure shape integrity.',
+    bestFor: [
+      'Complex multi-level filter trees and nested configurations',
+      'Composite query criteria (e.g. { role, minRating, verified })',
+      'Table column preferences and layout state',
+      'Dynamic form draft states stored in the URL',
+    ],
+    cleanUrlBehavior: {
+      rule: 'Omitted when matching default object or invalid JSON',
+      description: 'Omits the parameter when deep object equality matches defaultValue or if JSON is invalid.',
+      rules: [
+        {
+          condition: 'areValuesEqual(object, defaultObject)',
+          behavior: 'Key removed from URL',
+          exampleUrl: 'https://example.com/reports (clean)',
+        },
+        {
+          condition: 'invalid JSON syntax (e.g. ?f={bad)',
+          behavior: 'Safely falls back to defaultValue without crashing',
+          exampleUrl: 'https://example.com/reports (clean)',
+        },
+      ],
+    },
+    parameters: [
+      {
+        name: 'validator',
+        type: '(data: unknown) => boolean',
+        required: false,
+        description: 'Optional predicate function to validate the parsed JSON payload.',
+      },
+    ],
+    codeExample: [
+      "'use client';",
+      "",
+      "import { useQueryState, parseAsJson } from 'paramsync';",
+      "",
+      "interface FilterCriteria {",
+      "  role: string;",
+      "  minRating: number;",
+      "}",
+      "",
+      "export function ComplexFilter() {",
+      "  const [filters, setFilters] = useQueryState(",
+      "    'filters',",
+      "    parseAsJson<FilterCriteria>().withDefault({ role: 'all', minRating: 0 })",
+      "  );",
+      "",
+      "  return (",
+      "    <div>",
+      "      <span>Role: {filters.role}</span>",
+      "      <button onClick={() => setFilters({ role: 'admin', minRating: 5 })}>",
+      "        Set Admin",
+      "      </button>",
+      "    </div>",
+      "  );",
+      "}"
+    ].join('\n'),
+    advancedExample: [
+      "// With custom runtime validator",
+      "const validatedParser = parseAsJson<{ role: string }>((d): d is { role: string } => {",
+      "  return typeof d === 'object' && d !== null && 'role' in d;",
+      "});"
+    ].join('\n'),
+    relatedParsers: [
+      { name: 'parseAsArray', href: '/docs/parsers/parse-as-array' },
+      { name: 'createParser', href: '/docs/parsers/create-parser' },
+    ],
+  },
+
   'parse-as-string': {
     slug: 'parse-as-string',
     name: 'parseAsString',
     signature: 'parseAsString: Parser<string | null>',
     returnType: 'string | null (or string with .withDefault())',
-    summary: 'Standard string parameter parser with automatic empty string purging and debounce support.',
+    summary: 'Standard string parameter parser with Arabic/Unicode support, safe URI decoding, and automatic empty string purging.',
     whatItDoes:
-      'Reads and writes query string values without altering character encoding or type casing. When paired with withDefault(""), any empty string input or matches to the default are omitted from the URL automatically according to the Clean URL Policy.',
+      'Reads and writes query string values with native support for Arabic characters, spaces, and Unicode. Built-in safe decoding wraps decodeURIComponent in try/catch to guarantee your app never crashes on malformed percent sequences (URIError). When paired with withDefault(""), any empty string input or matches to the default are omitted from the URL automatically according to the Clean URL Policy.',
     bestFor: [
       'Free-text search inputs and live search bars',
       'Active tab identifiers and category names',

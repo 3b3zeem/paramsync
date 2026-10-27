@@ -34,6 +34,46 @@ export function InstallationDocView() {
         </p>
       </header>
 
+            {/* Entrypoints Guide */}
+      <section className="mb-10">
+        <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 tracking-tight">
+          Entrypoints &amp; Framework Support
+        </h2>
+        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+          paramsync provides dedicated entrypoints tailored to your application architecture:
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="p-4 rounded-xl border border-zinc-200 dark:border-[#323846] bg-zinc-50 dark:bg-zinc-900/50">
+            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+              Vite, React Router, Remix, Astro
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 mb-3">
+              Router-agnostic with built-in Vanilla browser history support and zero dependencies on Next.js.
+            </p>
+            <CodeBlock
+              code={"import { useQueryState, parseAsString } from 'paramsync';"}
+              language="tsx"
+              filename="Component.tsx"
+            />
+          </div>
+
+          <div className="p-4 rounded-xl border border-zinc-200 dark:border-[#323846] bg-zinc-50 dark:bg-zinc-900/50">
+            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+              Next.js App Router (RSC)
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 mb-3">
+              Deep integration with Next.js router transitions, useTransition, and Server Components.
+            </p>
+            <CodeBlock
+              code={"import { useQueryState, parseAsString } from 'paramsync/next';"}
+              language="tsx"
+              filename="Component.tsx"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Package Manager Commands */}
       <section className="mb-10">
         <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 tracking-tight">
