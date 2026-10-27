@@ -65,10 +65,16 @@ export function DocsSidebar({ className = "" }: DocsSidebarProps) {
   };
 
   // Find active item for mobile trigger label
+  const normalizedPathname =
+    pathname.endsWith("/") && pathname.length > 1
+      ? pathname.slice(0, -1)
+      : pathname;
+
+  // Find active item for mobile trigger label
   const activeItem =
-    flatDocsNavigation.find((item) => item.href === pathname) ||
+    flatDocsNavigation.find((item) => item.href === normalizedPathname) ||
     flatDocsNavigation.find(
-      (item) => item.href !== "/docs" && pathname.startsWith(item.href),
+      (item) => item.href !== "/docs" && normalizedPathname.startsWith(item.href)
     );
 
   const renderNavList = (isMobile = false) => (
@@ -109,8 +115,8 @@ export function DocsSidebar({ className = "" }: DocsSidebarProps) {
                 >
                   {group.items.map((item) => {
                     const isActive =
-                      pathname === item.href ||
-                      (item.href !== "/docs" && pathname.startsWith(item.href));
+                      normalizedPathname === item.href ||
+                      (item.href !== "/docs" && normalizedPathname.startsWith(item.href));
 
                     return (
                       <li key={item.href}>

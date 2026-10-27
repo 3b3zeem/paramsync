@@ -72,7 +72,7 @@ export function Navbar() {
             {/* Desktop Navigation Links */}
             <nav className="hidden md:flex items-center gap-1 text-xs font-mono">
               <Link
-                href="/docs/parsers/parse-as-string"
+                href="/docs"
                 className={`px-3 py-1.5 rounded-md transition-colors ${
                   isDocs
                     ? "bg-zinc-100 dark:bg-[#292e39] text-zinc-900 dark:text-zinc-100 font-medium"
@@ -231,7 +231,7 @@ export function Navbar() {
                   </kbd>
                 </button>
                 <Link
-                  href="/docs/parsers/parse-as-string"
+                  href="/docs"
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-3 py-2 rounded-md transition-colors ${
                     isDocs

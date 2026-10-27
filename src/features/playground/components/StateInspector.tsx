@@ -167,7 +167,7 @@ export function StateInspector() {
       <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-mono text-zinc-500 pt-1 select-none">
         <span>Built for type-safe state synchronization across Next.js runtimes.</span>
         <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
-          <a href="/docs/parsers/parse-as-string" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">
+          <a href="/docs" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">
             Release Notes
           </a>
           <a href="/docs/faq" className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">

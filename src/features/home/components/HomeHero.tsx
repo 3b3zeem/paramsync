@@ -55,7 +55,7 @@ export function HomeHero() {
         </Link>
 
         <Link
-          href="/docs/parsers/parse-as-string"
+          href="/docs"
           className="w-full sm:w-auto px-5 py-2.5 rounded-lg border border-zinc-300 dark:border-[#383f4e] bg-white dark:bg-[#191b21] text-zinc-700 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-[#2a303d] font-medium text-sm transition-colors shadow-2xs"
         >
           Read Documentation
